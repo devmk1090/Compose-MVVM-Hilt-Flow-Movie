@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.ui
+package com.bhdev1215.movieinfo3.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
