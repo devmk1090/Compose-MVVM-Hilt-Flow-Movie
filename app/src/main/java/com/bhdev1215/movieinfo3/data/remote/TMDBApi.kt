@@ -12,6 +12,6 @@ interface TMDBApi {
     suspend fun getTrendingTodayMovies(
         @Query("page") page: Int = PAGING_INDEX,
         @Query("api_key") apiKey: String = API_KEY,
-        @Query("language") language: String = "kr"
+        @Query("language") language: String = "ko"
     ): MovieResponse
 }
