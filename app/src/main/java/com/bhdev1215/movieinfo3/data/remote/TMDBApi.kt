@@ -8,8 +8,8 @@ import retrofit2.http.Query
 
 interface TMDBApi {
 
-    @GET("trending/movie/day")
-    suspend fun getTrendingTodayMovies(
+    @GET("trending/movie/week")
+    suspend fun getTrendingWeekMovies(
         @Query("page") page: Int = PAGING_INDEX,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"

@@ -16,7 +16,7 @@ class TrendingMovieSource(private val api: TMDBApi): PagingSource<Int, Movie>() 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
         return try {
             val nextPage = params.key ?: 1
-            val trendingMovieList = api.getTrendingTodayMovies(nextPage)
+            val trendingMovieList = api.getTrendingWeekMovies(nextPage)
             Timber.d("list: ${trendingMovieList.searches}")
             LoadResult.Page(
                 data = trendingMovieList.searches,

@@ -31,9 +31,9 @@ class HomeViewModel @Inject constructor(
     /**
      * Movie
      */
-    fun getTrendingMovies() {
+    private fun getTrendingMovies() {
         viewModelScope.launch {
-            _trendingMovieList.value = moviesRepository.getTrendingTodayMovies().cachedIn(viewModelScope)
+            _trendingMovieList.value = moviesRepository.getTrendingWeekMovies().cachedIn(viewModelScope)
         }
     }
 }

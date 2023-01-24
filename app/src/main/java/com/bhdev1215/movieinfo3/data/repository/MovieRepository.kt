@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class MovieRepository @Inject constructor(private val api: TMDBApi) {
 
-    fun getTrendingTodayMovies(): Flow<PagingData<Movie>> {
+    fun getTrendingWeekMovies(): Flow<PagingData<Movie>> {
         return Pager(
             config = PagingConfig(enablePlaceholders = false, pageSize = 27),
             pagingSourceFactory = {
