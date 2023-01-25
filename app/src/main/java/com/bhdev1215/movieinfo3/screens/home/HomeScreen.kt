@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.screens
+package com.bhdev1215.movieinfo3.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -24,7 +24,7 @@ import androidx.paging.compose.items
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
-import com.bhdev1215.movieinfo3.screens.home.HomeViewModel
+import com.bhdev1215.movieinfo3.screens.more.MoreScreen
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
 import com.bhdev1215.movieinfo3.util.Constants.IMAGE_BASE_UR
 import timber.log.Timber
@@ -67,8 +67,9 @@ fun HomeScreen(
         LazyColumn {
             item {
                 Row(
-                    modifier = Modifier.fillMaxWidth().
-                        padding(start = 4.dp, end = 4.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 4.dp, end = 4.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
@@ -94,7 +95,6 @@ fun HomeScreen(
                 ) {
                     LazyRow(content = {
                         items(trendingMovieList) { it ->
-                            Timber.d("home : $it")
                             MovieItem(
                                 modifier = Modifier
                                     .fillMaxHeight()
