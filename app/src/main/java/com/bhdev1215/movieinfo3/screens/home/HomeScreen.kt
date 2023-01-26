@@ -19,9 +19,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.bhdev1215.movieinfo3.R
+import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.screens.more.MoreScreen
@@ -34,6 +36,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
 
+    val navController = rememberNavController()
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
 
     Column(
@@ -80,7 +83,7 @@ fun HomeScreen(
                             fontSize = 18.sp
                         ),
                         onClick = {
-
+                            navController.navigate(NavigationObject.MORE)
                     })
                 }
                 Spacer(modifier = Modifier.height(8.dp))
