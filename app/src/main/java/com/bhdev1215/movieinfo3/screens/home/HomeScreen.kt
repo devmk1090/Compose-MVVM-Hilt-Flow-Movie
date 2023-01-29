@@ -100,7 +100,7 @@ fun HomeScreen(
                                 modifier = Modifier
                                     .fillMaxHeight()
                                     .width(150.dp)
-                                    .clickable { TODO() },
+                                    .clickable {  },
                                 imageUrl = "$IMAGE_BASE_UR/${it?.posterPath}"
                             )
                         }
