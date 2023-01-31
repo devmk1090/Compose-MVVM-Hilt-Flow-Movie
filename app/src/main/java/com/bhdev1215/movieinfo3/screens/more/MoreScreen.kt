@@ -40,11 +40,6 @@ fun MoreScreen(
             modifier = Modifier.fillMaxWidth(),
             showBackArrow = true,
         )
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            content = {
-
-        })
         LazyColumn {
             item(content = {
                 Spacer(modifier = Modifier.height(5.dp))
@@ -54,17 +49,18 @@ fun MoreScreen(
                         .height(230.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    LazyColumn(content = {
-                        items(trendingMovieList) { it ->
-                            MovieItem(
-                                modifier = Modifier
-                                    .fillMaxHeight()
-                                    .width(150.dp)
-                                    .clickable { },
-                                imageUrl = "${Constants.IMAGE_BASE_UR}/${it?.posterPath}"
-                            )
-                        }
-                    })
+                    LazyVerticalGrid(
+                        cells = GridCells.Fixed(2),
+                        content = {
+                            this@LazyColumn.items(trendingMovieList) {
+                                MovieItem(
+                                    modifier = Modifier
+                                        .size(250.dp)
+                                        .clickable { },
+                                    imageUrl = "${Constants.IMAGE_BASE_UR}/${it?.posterPath}"
+                                )
+                            }
+                        })
                 }
             })
         }
