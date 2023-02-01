@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -30,9 +31,7 @@ fun MoreScreen(
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
 
     Timber.d("morescreen : $trendingMovieList")
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
+    Column {
         CommonAppBar(
             title = {
                     Text(text = "금주의 트렌드")
@@ -46,21 +45,20 @@ fun MoreScreen(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(230.dp),
+                        .height(1000.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    LazyVerticalGrid(
-                        cells = GridCells.Fixed(2),
-                        content = {
-                            this@LazyColumn.items(trendingMovieList) {
-                                MovieItem(
-                                    modifier = Modifier
-                                        .size(250.dp)
-                                        .clickable { },
-                                    imageUrl = "${Constants.IMAGE_BASE_UR}/${it?.posterPath}"
-                                )
-                            }
-                        })
+                    LazyColumn(content = {
+                        items(trendingMovieList) { it ->
+                            MovieItem(
+                                modifier = Modifier
+                                    .height(150.dp)
+                                    .fillMaxWidth()
+                                    .clickable {  },
+                                imageUrl = "${Constants.IMAGE_BASE_UR}/${it?.posterPath}"
+                            )
+                        }
+                    })
                 }
             })
         }
