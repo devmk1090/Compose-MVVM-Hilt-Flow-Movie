@@ -62,7 +62,8 @@ fun HomeScreen(
                         tint = primaryGray
                     )
                 }
-            }
+            },
+            navController = navController
         )
 
         LazyColumn {

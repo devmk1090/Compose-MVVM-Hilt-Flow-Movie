@@ -11,7 +11,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -31,36 +33,25 @@ fun MoreScreen(
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
 
     Timber.d("morescreen : $trendingMovieList")
+
     Column {
         CommonAppBar(
             title = {
-                    Text(text = "금주의 트렌드")
+                    Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
             },
             modifier = Modifier.fillMaxWidth(),
             showBackArrow = true,
+            navController = navController
         )
-        LazyColumn {
-            item(content = {
-                Spacer(modifier = Modifier.height(5.dp))
-                Box(
+        LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
+            items(trendingMovieList.itemCount) { it ->
+                MovieItem(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(1000.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    LazyColumn(content = {
-                        items(trendingMovieList) { it ->
-                            MovieItem(
-                                modifier = Modifier
-                                    .height(150.dp)
-                                    .fillMaxWidth()
-                                    .clickable {  },
-                                imageUrl = "${Constants.IMAGE_BASE_UR}/${it?.posterPath}"
-                            )
-                        }
-                    })
-                }
-            })
-        }
+                        .height(285.dp)
+                        .clickable { },
+                    imageUrl = "${Constants.IMAGE_BASE_UR}/${trendingMovieList[it]?.posterPath}"
+                )
+            }
+        })
     }
 }

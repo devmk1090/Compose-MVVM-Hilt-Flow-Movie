@@ -24,7 +24,7 @@ fun MovieItem(modifier: Modifier, imageUrl: String) {
             ),
             modifier = Modifier.fillMaxSize(),
             contentDescription = "Movies",
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.FillHeight
         )
     }
 }
