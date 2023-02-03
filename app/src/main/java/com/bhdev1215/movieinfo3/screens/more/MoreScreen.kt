@@ -1,5 +1,6 @@
 package com.bhdev1215.movieinfo3.screens.more
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -18,6 +19,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
+import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.screens.home.HomeViewModel
@@ -28,11 +30,10 @@ import timber.log.Timber
 @Composable
 fun MoreScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    navController: NavController) {
+    navController: NavController
+) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
-
-    Timber.d("morescreen : $trendingMovieList")
 
     Column {
         CommonAppBar(
@@ -48,7 +49,10 @@ fun MoreScreen(
                 MovieItem(
                     modifier = Modifier
                         .height(285.dp)
-                        .clickable { },
+                        .clickable {
+                            Timber.d(trendingMovieList[it]?.id.toString())
+                            navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${trendingMovieList[it]?.id}"))
+                        },
                     imageUrl = "${Constants.IMAGE_BASE_UR}/${trendingMovieList[it]?.posterPath}"
                 )
             }
