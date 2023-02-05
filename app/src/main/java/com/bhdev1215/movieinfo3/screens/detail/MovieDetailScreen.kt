@@ -3,6 +3,8 @@ package com.bhdev1215.movieinfo3.screens.detail
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
@@ -14,6 +16,7 @@ import androidx.navigation.NavController
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.model.Movie
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
+import com.bhdev1215.movieinfo3.screens.components.CommonDetail
 import com.bhdev1215.movieinfo3.util.Resource
 
 @Composable
@@ -22,6 +25,7 @@ fun MovieDetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navController: NavController
 ) {
+    val scrollState = rememberLazyListState()
     val detail = produceState<Resource<MovieDetailResponse>>(initialValue = Resource.Loading()) {
         value = viewModel.getMovieDetail(id)
     }.value
@@ -38,7 +42,15 @@ fun MovieDetailScreen(
                     showBackArrow = true,
                     navController = navController
                 )
+
+                //Detail
+                CommonDetail(
+                    item = detail,
+                    scrollState = scrollState
+                )
             }
+        } else {
+            CircularProgressIndicator()
         }
     }
 }
