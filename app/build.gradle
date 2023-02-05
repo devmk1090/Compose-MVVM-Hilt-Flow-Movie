@@ -101,4 +101,10 @@ dependencies {
     // Swipe to refresh
     implementation "com.google.accompanist:accompanist-swiperefresh:0.24.3-alpha"
 
+    // Accompanist System UI controller
+    implementation "com.google.accompanist:accompanist-systemuicontroller:0.24.2-alpha"
+
+    // Navigation animation
+    implementation 'com.google.accompanist:accompanist-navigation-animation:0.24.2-alpha'
+
 }
