@@ -25,7 +25,6 @@ fun MovieDetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    val scrollState = rememberLazyListState()
     val detail = produceState<Resource<MovieDetailResponse>>(initialValue = Resource.Loading()) {
         value = viewModel.getMovieDetail(id)
     }.value
@@ -44,10 +43,7 @@ fun MovieDetailScreen(
                 )
 
                 //Detail
-                CommonDetail(
-                    item = detail,
-                    scrollState = scrollState
-                )
+                CommonDetail(item = detail)
             }
         } else {
             CircularProgressIndicator()
