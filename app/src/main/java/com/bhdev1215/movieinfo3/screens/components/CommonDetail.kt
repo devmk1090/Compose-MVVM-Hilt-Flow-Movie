@@ -16,12 +16,14 @@ import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
+import com.bhdev1215.movieinfo3.model.video.VideoItems
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
 @Composable
 fun CommonDetail(
-    item: Resource<MovieDetailResponse>
+    item: Resource<MovieDetailResponse>,
+    videoList: ArrayList<VideoItems>
 ) {
     val data = item.data
     Column(
@@ -88,6 +90,8 @@ fun CommonDetail(
                 color = Color.White
             )
             Spacer(modifier = Modifier.height(10.dp))
+            VideoScreen(videoList)
+
         }
     }
 }

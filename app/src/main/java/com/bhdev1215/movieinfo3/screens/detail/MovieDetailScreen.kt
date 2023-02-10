@@ -32,7 +32,6 @@ fun MovieDetailScreen(
         value = viewModel.getMovieVideos(id)
     }.value
 
-
     Box {
         if (detail is Resource.Success) {
             Column {
@@ -46,8 +45,7 @@ fun MovieDetailScreen(
                 )
 
                 //Detail
-                CommonDetail(item = detail)
-                VideoScreen(item = videos)
+                CommonDetail(item = detail, videoList = videos.data!!.results)
             }
         } else {
             CircularProgressIndicator()
