@@ -51,7 +51,7 @@ fun CommonDetail(
                     .fillMaxWidth(),
                 text = data.title!!,
                 color = Color.White,
-                fontSize = 18.sp,
+                fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
             Row(

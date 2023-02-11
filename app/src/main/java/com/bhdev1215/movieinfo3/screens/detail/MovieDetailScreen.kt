@@ -16,7 +16,6 @@ import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.CommonDetail
-import com.bhdev1215.movieinfo3.screens.components.VideoScreen
 import com.bhdev1215.movieinfo3.util.Resource
 
 @Composable
@@ -33,7 +32,7 @@ fun MovieDetailScreen(
     }.value
 
     Box {
-        if (detail is Resource.Success) {
+        if (detail is Resource.Success && videos is Resource.Success) {
             Column {
                 CommonAppBar(
                     title = {

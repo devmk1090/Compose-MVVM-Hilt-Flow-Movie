@@ -49,12 +49,12 @@ fun VideoScreen(
                     modifier = Modifier.padding(0.dp, 5.dp)
                 ) {
                     Box(modifier = Modifier
-                        .height(180.dp)
+                        .height(160.dp)
                         .width(240.dp)
                         .clickable {
                             val playVideoIntent = Intent(
                                 Intent.ACTION_VIEW,
-                                Uri.parse(Constants.getYoutubeVideoThumbnail(item.key))
+                                Uri.parse(Constants.getYoutubeVideoPath(item.key))
                             )
                             context.startActivity(playVideoIntent)
                         }
@@ -79,5 +79,4 @@ fun VideoScreen(
             })
         }
     }
-    Timber.d("501501", item)
 }
