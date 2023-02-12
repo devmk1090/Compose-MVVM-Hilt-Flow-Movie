@@ -15,18 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.video.VideoItems
-import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
-import com.bhdev1215.movieinfo3.util.Resource
-import timber.log.Timber
 
 @Composable
 fun VideoScreen(
