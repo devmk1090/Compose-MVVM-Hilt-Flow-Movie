@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.model
+package com.bhdev1215.movieinfo3.model.artist
 
 import com.google.gson.annotations.SerializedName
 

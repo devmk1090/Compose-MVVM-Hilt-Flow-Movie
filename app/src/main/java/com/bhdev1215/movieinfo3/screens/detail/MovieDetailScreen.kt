@@ -13,6 +13,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
+import com.bhdev1215.movieinfo3.model.artist.Credit
 import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.CommonDetail
@@ -30,9 +31,12 @@ fun MovieDetailScreen(
     val videos = produceState<Resource<Videos>>(initialValue = Resource.Loading()) {
         value = viewModel.getMovieVideos(id)
     }.value
+    val credits = produceState<Resource<Credit>>(initialValue = Resource.Loading()) {
+        value = viewModel.getMovieCredit(id)
+    }.value
 
     Box {
-        if (detail is Resource.Success && videos is Resource.Success) {
+        if (detail is Resource.Success && videos is Resource.Success && credits is Resource.Success) {
             Column {
                 CommonAppBar(
                     title = {
@@ -44,7 +48,7 @@ fun MovieDetailScreen(
                 )
 
                 //Detail
-                CommonDetail(item = detail, videoList = videos.data!!.results)
+                CommonDetail(item = detail, videoList = videos.data!!.results, creditList = credits.data!!.cast)
             }
         } else {
             CircularProgressIndicator()

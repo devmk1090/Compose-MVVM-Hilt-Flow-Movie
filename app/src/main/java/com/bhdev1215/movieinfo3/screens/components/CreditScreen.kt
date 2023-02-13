@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -14,14 +13,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import com.bhdev1215.movieinfo3.model.Cast
+import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
 
 @Composable
-fun ArtistCrewScreen(navController: NavController?, item: ArrayList<Cast>) {
+fun CreditScreen(item: ArrayList<Cast>) {
     Column(modifier = Modifier.padding(bottom = 10.dp)) {
         Text(
             text = "출연진",
