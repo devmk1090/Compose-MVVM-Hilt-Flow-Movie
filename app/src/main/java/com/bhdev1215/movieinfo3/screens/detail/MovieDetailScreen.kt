@@ -48,7 +48,7 @@ fun MovieDetailScreen(
                 )
 
                 //Detail
-                CommonDetail(item = detail, videoList = videos.data!!.results, creditList = credits.data!!.cast)
+                CommonDetail(item = detail, videoList = videos.data!!.results, creditList = credits.data!!.cast, crewList = credits.data!!.crew)
             }
         } else {
             CircularProgressIndicator()

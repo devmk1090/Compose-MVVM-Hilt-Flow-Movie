@@ -17,6 +17,7 @@ import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Cast
+import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
@@ -25,7 +26,8 @@ import com.bhdev1215.movieinfo3.util.Resource
 fun CommonDetail(
     item: Resource<MovieDetailResponse>,
     videoList: ArrayList<VideoItems>,
-    creditList: ArrayList<Cast>
+    creditList: ArrayList<Cast>,
+    crewList: ArrayList<Crew>
 ) {
     val data = item.data
     Column(
@@ -94,7 +96,9 @@ fun CommonDetail(
             Spacer(modifier = Modifier.height(10.dp))
             VideoScreen(videoList)
             Spacer(modifier = Modifier.height(10.dp))
-            CreditScreen(creditList)
+            CastScreen(creditList)
+            Spacer(modifier = Modifier.height(10.dp))
+            CrewScreen(crewList)
         }
     }
 }

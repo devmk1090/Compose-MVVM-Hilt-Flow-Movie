@@ -14,15 +14,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.bhdev1215.movieinfo3.model.artist.Cast
+import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
+import com.bhdev1215.movieinfo3.R
 
 @Composable
-fun CreditScreen(item: ArrayList<Cast>) {
+fun CrewScreen(item: ArrayList<Crew>) {
     Column(modifier = Modifier.padding(bottom = 10.dp)) {
         Text(
-            text = "출연진",
+            text = "제작진",
             color = Color.White,
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold
@@ -39,7 +40,11 @@ fun CreditScreen(item: ArrayList<Cast>) {
 
                     ) {
                     Image(
-                        painter = rememberImagePainter(Constants.IMAGE_BASE_URL.plus(item.profilePath)),
+                        painter = rememberImagePainter(Constants.IMAGE_BASE_URL.plus(item.profilePath),
+                        builder = {
+                            placeholder(R.drawable.ic_person_white)
+                            error(R.drawable.ic_person_white)
+                        }),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
                         modifier = Modifier
@@ -55,7 +60,9 @@ fun CreditScreen(item: ArrayList<Cast>) {
                     Text(
                         text = item.name,
                         color = Color.White,
-                        fontSize = 14.sp
+                        fontSize = 14.sp,
+                        modifier = Modifier
+                            .width(80.dp)
                     )
                 }
             })
