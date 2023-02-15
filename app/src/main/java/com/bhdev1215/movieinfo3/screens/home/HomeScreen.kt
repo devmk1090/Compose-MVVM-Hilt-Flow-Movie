@@ -27,7 +27,7 @@ import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
-import com.bhdev1215.movieinfo3.util.Constants.IMAGE_BASE_UR
+import com.bhdev1215.movieinfo3.util.Constants.IMAGE_BASE_URL
 
 @Composable
 fun HomeScreen(
@@ -102,7 +102,7 @@ fun HomeScreen(
                                     .fillMaxHeight()
                                     .width(150.dp)
                                     .clickable {  },
-                                imageUrl = "$IMAGE_BASE_UR/${it?.posterPath}"
+                                imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}"
                             )
                         }
                     })

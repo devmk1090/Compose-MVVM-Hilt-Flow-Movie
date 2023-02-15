@@ -50,10 +50,9 @@ fun MoreScreen(
                     modifier = Modifier
                         .height(285.dp)
                         .clickable {
-                            Timber.d(trendingMovieList[it]?.id.toString())
                             navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${trendingMovieList[it]?.id}"))
                         },
-                    imageUrl = "${Constants.IMAGE_BASE_UR}/${trendingMovieList[it]?.posterPath}"
+                    imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingMovieList[it]?.posterPath}"
                 )
             }
         })

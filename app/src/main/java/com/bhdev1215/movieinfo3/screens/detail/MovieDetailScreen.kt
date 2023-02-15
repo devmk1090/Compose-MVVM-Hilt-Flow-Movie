@@ -3,7 +3,6 @@ package com.bhdev1215.movieinfo3.screens.detail
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +13,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
-import com.bhdev1215.movieinfo3.model.Movie
+import com.bhdev1215.movieinfo3.model.artist.Credit
+import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.CommonDetail
 import com.bhdev1215.movieinfo3.util.Resource
@@ -25,14 +25,18 @@ fun MovieDetailScreen(
     viewModel: DetailViewModel = hiltViewModel(),
     navController: NavController
 ) {
-    val scrollState = rememberLazyListState()
     val detail = produceState<Resource<MovieDetailResponse>>(initialValue = Resource.Loading()) {
         value = viewModel.getMovieDetail(id)
     }.value
-
+    val videos = produceState<Resource<Videos>>(initialValue = Resource.Loading()) {
+        value = viewModel.getMovieVideos(id)
+    }.value
+    val credits = produceState<Resource<Credit>>(initialValue = Resource.Loading()) {
+        value = viewModel.getMovieCredit(id)
+    }.value
 
     Box {
-        if (detail is Resource.Success) {
+        if (detail is Resource.Success && videos is Resource.Success && credits is Resource.Success) {
             Column {
                 CommonAppBar(
                     title = {
@@ -44,10 +48,7 @@ fun MovieDetailScreen(
                 )
 
                 //Detail
-                CommonDetail(
-                    item = detail,
-                    scrollState = scrollState
-                )
+                CommonDetail(item = detail, videoList = videos.data!!.results, creditList = credits.data!!.cast, crewList = credits.data!!.crew)
             }
         } else {
             CircularProgressIndicator()
