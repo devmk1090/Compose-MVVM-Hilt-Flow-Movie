@@ -30,12 +30,6 @@ fun VideoScreen(
 ) {
     val context = LocalContext.current
     Column {
-        Text(
-            text = "트레일러",
-            color = Color.White,
-            fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold
-        )
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
         ) {

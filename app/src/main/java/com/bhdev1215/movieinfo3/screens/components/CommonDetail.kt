@@ -49,7 +49,12 @@ fun CommonDetail(
             contentDescription = "Poster"
         )
         Column(Modifier.padding(start = 4.dp, end = 4.dp)) {
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(10.dp))
+
+            VideoScreen(videoList)
+
+            Spacer(modifier = Modifier.height(10.dp))
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -93,12 +98,10 @@ fun CommonDetail(
                 fontWeight = FontWeight.ExtraLight,
                 color = Color.White
             )
+
             Spacer(modifier = Modifier.height(10.dp))
-            VideoScreen(videoList)
-            Spacer(modifier = Modifier.height(10.dp))
-            CastScreen(creditList)
-            Spacer(modifier = Modifier.height(10.dp))
-            CrewScreen(crewList)
+
+            CreditScreen(creditList, crewList)
         }
     }
 }
