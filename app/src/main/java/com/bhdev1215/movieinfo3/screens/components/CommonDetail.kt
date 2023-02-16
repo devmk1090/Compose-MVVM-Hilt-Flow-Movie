@@ -13,6 +13,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
@@ -24,6 +25,7 @@ import com.bhdev1215.movieinfo3.util.Resource
 
 @Composable
 fun CommonDetail(
+    navController: NavController,
     item: Resource<MovieDetailResponse>,
     videoList: ArrayList<VideoItems>,
     creditList: ArrayList<Cast>,
@@ -101,7 +103,7 @@ fun CommonDetail(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            CreditScreen(creditList, crewList)
+            CreditScreen(navController, creditList, crewList)
         }
     }
 }

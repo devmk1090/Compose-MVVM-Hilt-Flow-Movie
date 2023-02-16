@@ -1,5 +1,6 @@
 package com.bhdev1215.movieinfo3.screens.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -13,15 +14,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
+import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
+import timber.log.Timber
 
 @Composable
 fun CreditScreen(
+    navController: NavController,
     creditList: ArrayList<Cast>,
     crewList: ArrayList<Crew>
     ) {
@@ -57,7 +62,8 @@ fun CreditScreen(
                             .width(80.dp)
                             .cornerRadius10()
                             .clickable {
-
+                                Timber.d("${item.castId}")
+                                navController.navigate(NavigationObject.CastDetail.CAST_DETAIL.plus("/${item.castId}"))
                             }
 
                     )
@@ -104,10 +110,6 @@ fun CreditScreen(
                             .height(120.dp)
                             .width(80.dp)
                             .cornerRadius10()
-                            .clickable {
-
-                            }
-
                     )
                     Text(
                         text = item.name,
