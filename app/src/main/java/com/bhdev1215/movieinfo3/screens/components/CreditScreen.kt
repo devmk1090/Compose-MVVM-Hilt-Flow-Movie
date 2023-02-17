@@ -65,7 +65,6 @@ fun CreditScreen(
                                 Timber.d("${item.castId}")
                                 navController.navigate(NavigationObject.CastDetail.CAST_DETAIL.plus("/${item.castId}"))
                             }
-
                     )
                     Text(
                         text = item.name,

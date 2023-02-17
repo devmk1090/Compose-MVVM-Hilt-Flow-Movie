@@ -3,6 +3,7 @@ package com.bhdev1215.movieinfo3.data.remote
 import com.bhdev1215.movieinfo3.BuildConfig.API_KEY
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.data.remote.response.MovieResponse
+import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.Credit
 import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.util.Constants.PAGING_INDEX
@@ -40,4 +41,10 @@ interface TMDBApi {
         @Query("language") language: String = "ko"
     ): Credit
 
+    @GET("person/{person_id}")
+    suspend fun getCastDetail(
+        @Path("person_id") personId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): CastDetail
 }
