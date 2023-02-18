@@ -62,8 +62,8 @@ fun CreditScreen(
                             .width(80.dp)
                             .cornerRadius10()
                             .clickable {
-                                Timber.d("${item.castId}")
-                                navController.navigate(NavigationObject.CastDetail.CAST_DETAIL.plus("/${item.castId}"))
+                                Timber.d("${item.id}")
+                                navController.navigate(NavigationObject.CastDetail.CAST_DETAIL.plus("/${item.id}"))
                             }
                     )
                     Text(
