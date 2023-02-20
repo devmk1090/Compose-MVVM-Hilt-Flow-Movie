@@ -17,7 +17,9 @@ import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
+import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.screens.detail.DetailViewModel
+import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 import timber.log.Timber
@@ -30,6 +32,10 @@ fun CastDetailScreen(
 ) {
     val castDetail = produceState<Resource<CastDetail>>(initialValue = Resource.Loading()) {
         value = viewModel.getCastDetail(id)
+    }.value
+
+    val castFilmography = produceState<Resource<CastFilmography>>(initialValue = Resource.Loading()) {
+        value = viewModel.getCastFilmography(id)
     }.value
 
     val data = castDetail.data
@@ -54,13 +60,14 @@ fun CastDetailScreen(
                             painter = rememberImagePainter(
                                 data = Constants.IMAGE_BASE_URL + data!!.profilePath,
                                 builder = {
-                                    placeholder(R.drawable.ic_github)
-                                    crossfade(true)
+                                    placeholder(R.drawable.ic_person_white)
+                                    error(R.drawable.ic_person_white)
                                 }
                             ),
                             modifier = Modifier
                                 .width(200.dp)
-                                .height(300.dp),
+                                .height(300.dp)
+                                .cornerRadius10(),
                             contentScale = ContentScale.FillWidth,
                             contentDescription = "Profile"
                         )
