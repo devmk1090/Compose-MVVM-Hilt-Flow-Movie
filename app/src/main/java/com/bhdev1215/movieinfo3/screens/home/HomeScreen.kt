@@ -87,27 +87,30 @@ fun HomeScreen(
                 }
                 Spacer(modifier = Modifier.height(8.dp))
             }
-            item(content = {
-                Spacer(modifier = Modifier.height(5.dp))
-                Box(
+            item {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(230.dp),
-                    contentAlignment = Alignment.Center
+                        .height(215.dp)
                 ) {
                     LazyRow(content = {
                         items(trendingMovieList) { it ->
                             MovieItem(
                                 modifier = Modifier
-                                    .fillMaxHeight()
                                     .width(150.dp)
-                                    .clickable {  },
-                                imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}"
+                                    .clickable {
+                                        navController.navigate(
+                                            NavigationObject.Detail.MOVIE_DETAIL.plus(
+                                                "/${it?.id}"
+                                            )
+                                        )
+                                    },
+                                imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
                             )
                         }
                     })
                 }
-            })
+            }
         }
     }
 }

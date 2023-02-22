@@ -35,11 +35,9 @@ fun VideoScreen(
         ) {
 
             items(item, itemContent = { item ->
-                Column(
-                    modifier = Modifier.padding(0.dp, 5.dp)
-                ) {
+
                     Box(modifier = Modifier
-                        .height(160.dp)
+                        .height(135.dp)
                         .width(240.dp)
                         .clickable {
                             val playVideoIntent = Intent(
@@ -65,7 +63,6 @@ fun VideoScreen(
                         )
                     }
 
-                }
             })
         }
     }

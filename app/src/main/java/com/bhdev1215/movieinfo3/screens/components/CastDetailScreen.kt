@@ -78,7 +78,7 @@ fun CastDetailScreen(
                         Spacer(modifier = Modifier.width(10.dp))
                         Column {
                             Text(text = data.name, color = Color.White, fontSize = 16.sp)
-                            Text(text = data.birthday, color = Color.White, fontSize = 16.sp)
+                            data.birthday?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
                         }
                     }
                 }
@@ -91,14 +91,19 @@ fun CastDetailScreen(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold
                 )
-                LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                LazyVerticalGrid(cells = GridCells.Fixed(3), content = {
                     items(castFilmographyList!!.size) { it ->
                         MovieItem(
                             modifier = Modifier
-                                .height(285.dp)
+                                .height(185.dp)
                                 .clickable {
+                                    navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${castFilmographyList[it].id}"))
                                 },
-                            imageUrl = "${Constants.IMAGE_BASE_URL}/${castFilmographyList[it].posterPath}"
+                            imageUrl = "${Constants.IMAGE_BASE_URL}/${castFilmographyList[it].posterPath}",
+                            title = castFilmographyList[it].title
                         )
                     }
                 })

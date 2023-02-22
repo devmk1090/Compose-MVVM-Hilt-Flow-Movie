@@ -20,6 +20,7 @@ import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
+import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
@@ -46,7 +47,8 @@ fun CommonDetail(
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(585.dp),
+                .height(585.dp)
+                .cornerRadius10(),
             contentScale = ContentScale.FillWidth,
             contentDescription = "Poster"
         )
