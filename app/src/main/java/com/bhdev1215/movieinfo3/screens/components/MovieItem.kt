@@ -16,7 +16,7 @@ import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 
 @Composable
-fun MovieItem(modifier: Modifier, imageUrl: String, title: String? = "") {
+fun MovieItem(modifier: Modifier, imageUrl: String, title: String?, release: String?, rating: String?) {
     Column {
         Card(modifier = modifier.padding(4.dp)) {
             Image(
@@ -32,6 +32,8 @@ fun MovieItem(modifier: Modifier, imageUrl: String, title: String? = "") {
                 contentScale = ContentScale.FillWidth
             )
         }
-        title?.let { Text(text = it, color = Color.White, fontSize = 14.sp) }
+        title?.let { Text(text = it, color = Color.White, fontSize = 14.sp, modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
+        release?.let { Text(text = it, color = Color.White, fontSize = 14.sp,  modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
+        rating?.let { Text(text = it, color = Color.White, fontSize = 14.sp,  modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
     }
 }

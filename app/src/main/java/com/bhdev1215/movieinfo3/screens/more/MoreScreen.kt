@@ -52,7 +52,10 @@ fun MoreScreen(
                         .clickable {
                             navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${trendingMovieList[it]?.id}"))
                         },
-                    imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingMovieList[it]?.posterPath}"
+                    imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingMovieList[it]?.posterPath}",
+                    title = null,
+                    release = null,
+                    rating = null
                 )
             }
         })

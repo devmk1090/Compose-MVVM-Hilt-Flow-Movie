@@ -106,6 +106,9 @@ fun HomeScreen(
                                         )
                                     },
                                 imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                title = null,
+                                release = null,
+                                rating = null
                             )
                         }
                     })

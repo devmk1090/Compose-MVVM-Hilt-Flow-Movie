@@ -103,7 +103,9 @@ fun CastDetailScreen(
                                     navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${castFilmographyList[it].id}"))
                                 },
                             imageUrl = "${Constants.IMAGE_BASE_URL}/${castFilmographyList[it].posterPath}",
-                            title = castFilmographyList[it].title
+                            title = castFilmographyList[it].title,
+                            release = castFilmographyList[it].releaseDate,
+                            rating = castFilmographyList[it].rating.toString()
                         )
                     }
                 })
