@@ -22,6 +22,7 @@ import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.detail.DetailViewModel
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 import timber.log.Timber
@@ -78,7 +79,16 @@ fun CastDetailScreen(
                         Spacer(modifier = Modifier.width(10.dp))
                         Column {
                             Text(text = data.name, color = Color.White, fontSize = 16.sp)
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            data.knownForDepartment?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
+                            Spacer(modifier = Modifier.height(10.dp))
+
                             data.birthday?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
+                            data.deathday?.let { Text(text = "-\n$it", color = Color.White, fontSize = 16.sp) }
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            data.placeOfBirth?.let { Text(text = it, color = Color.White, fontSize = 16.sp)}
                         }
                     }
                 }
@@ -100,7 +110,11 @@ fun CastDetailScreen(
                             modifier = Modifier
                                 .height(185.dp)
                                 .clickable {
-                                    navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${castFilmographyList[it].id}"))
+                                    navController.navigate(
+                                        NavigationObject.Detail.MOVIE_DETAIL.plus(
+                                            "/${castFilmographyList[it].id}"
+                                        )
+                                    )
                                 },
                             imageUrl = "${Constants.IMAGE_BASE_URL}/${castFilmographyList[it].posterPath}",
                             title = castFilmographyList[it].title,

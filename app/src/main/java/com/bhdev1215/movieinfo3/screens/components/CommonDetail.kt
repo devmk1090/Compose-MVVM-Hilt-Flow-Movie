@@ -2,6 +2,7 @@ package com.bhdev1215.movieinfo3.screens.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -92,6 +93,28 @@ fun CommonDetail(
                         .padding(bottom = 12.dp),
                     percentage = data.voteAverage!!.toFloat(),
                 )
+            }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "장르",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+                LazyRow {
+                    items(data.genres!!.size) { it ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 4.dp),
+                            text = data.genres[it].name,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraLight,
+                            color = Color.White
+                        )
+                    }
+                }
             }
             Spacer(modifier = Modifier.height(10.dp))
             Text(
