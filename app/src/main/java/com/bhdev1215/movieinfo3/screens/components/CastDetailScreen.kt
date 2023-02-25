@@ -22,10 +22,8 @@ import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.detail.DetailViewModel
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
-import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
-import timber.log.Timber
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -65,8 +63,8 @@ fun CastDetailScreen(
                             painter = rememberImagePainter(
                                 data = Constants.IMAGE_BASE_URL + data!!.profilePath,
                                 builder = {
-                                    placeholder(R.drawable.ic_person_white)
-                                    error(R.drawable.ic_person_white)
+                                    placeholder(R.drawable.ic_person_placeholder)
+                                    error(R.drawable.ic_person_placeholder)
                                 }
                             ),
                             modifier = Modifier
@@ -81,11 +79,11 @@ fun CastDetailScreen(
                             Text(text = data.name, color = Color.White, fontSize = 16.sp)
                             Spacer(modifier = Modifier.height(10.dp))
 
-                            data.knownForDepartment?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
-                            Spacer(modifier = Modifier.height(10.dp))
-
                             data.birthday?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
                             data.deathday?.let { Text(text = "-\n$it", color = Color.White, fontSize = 16.sp) }
+                            Spacer(modifier = Modifier.height(10.dp))
+
+                            data.knownForDepartment?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
                             Spacer(modifier = Modifier.height(10.dp))
 
                             data.placeOfBirth?.let { Text(text = it, color = Color.White, fontSize = 16.sp)}

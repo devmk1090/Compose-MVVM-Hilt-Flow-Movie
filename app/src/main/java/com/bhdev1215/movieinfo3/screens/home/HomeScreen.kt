@@ -43,13 +43,8 @@ fun HomeScreen(
         CommonAppBar(
             title = {
                 Column {
-                    Image(
-                        painterResource(id = R.drawable.ic_github),
-                        contentDescription = "App Name",
-                        modifier = Modifier
-                            .size(width = 75.dp, height = 48.dp)
-                            .padding(8.dp)
-                    )
+                    //TODO '영화' , 'TV' 텍스트
+
                 }
             },
             modifier = Modifier.fillMaxWidth(),

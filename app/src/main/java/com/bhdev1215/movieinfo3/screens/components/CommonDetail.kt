@@ -42,7 +42,6 @@ fun CommonDetail(
             painter = rememberImagePainter(
                 data = Constants.IMAGE_BASE_URL + data!!.posterPath,
                 builder = {
-                    placeholder(R.drawable.ic_github)
                     crossfade(true)
                 }
             ),

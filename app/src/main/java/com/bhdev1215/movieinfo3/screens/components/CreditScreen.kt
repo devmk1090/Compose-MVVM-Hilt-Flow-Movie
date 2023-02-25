@@ -1,6 +1,5 @@
 package com.bhdev1215.movieinfo3.screens.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -51,8 +50,8 @@ fun CreditScreen(
                     Image(
                         painter = rememberImagePainter(Constants.IMAGE_BASE_URL.plus(item.profilePath),
                             builder = {
-                                placeholder(R.drawable.ic_person_white)
-                                error(R.drawable.ic_person_white)
+                                placeholder(R.drawable.ic_person_placeholder)
+                                error(R.drawable.ic_person_placeholder)
                             }),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
@@ -99,8 +98,8 @@ fun CreditScreen(
                     Image(
                         painter = rememberImagePainter(Constants.IMAGE_BASE_URL.plus(item.profilePath),
                             builder = {
-                                placeholder(R.drawable.ic_person_white)
-                                error(R.drawable.ic_person_white)
+                                placeholder(R.drawable.ic_person_placeholder)
+                                error(R.drawable.ic_person_placeholder)
                             }),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,

@@ -23,7 +23,6 @@ fun MovieItem(modifier: Modifier, imageUrl: String, title: String?, release: Str
                 painter = rememberImagePainter(
                     data = imageUrl,
                     builder = {
-                        placeholder(R.drawable.ic_launcher_background)
                         crossfade(true)
                     }
                 ),
