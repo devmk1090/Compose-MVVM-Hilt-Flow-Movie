@@ -43,13 +43,8 @@ fun HomeScreen(
         CommonAppBar(
             title = {
                 Column {
-                    Image(
-                        painterResource(id = R.drawable.ic_github),
-                        contentDescription = "App Name",
-                        modifier = Modifier
-                            .size(width = 75.dp, height = 48.dp)
-                            .padding(8.dp)
-                    )
+                    //TODO '영화' , 'TV' 텍스트
+
                 }
             },
             modifier = Modifier.fillMaxWidth(),
@@ -87,27 +82,33 @@ fun HomeScreen(
                 }
                 Spacer(modifier = Modifier.height(8.dp))
             }
-            item(content = {
-                Spacer(modifier = Modifier.height(5.dp))
-                Box(
+            item {
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(230.dp),
-                    contentAlignment = Alignment.Center
+                        .height(215.dp)
                 ) {
                     LazyRow(content = {
                         items(trendingMovieList) { it ->
                             MovieItem(
                                 modifier = Modifier
-                                    .fillMaxHeight()
                                     .width(150.dp)
-                                    .clickable {  },
-                                imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}"
+                                    .clickable {
+                                        navController.navigate(
+                                            NavigationObject.Detail.MOVIE_DETAIL.plus(
+                                                "/${it?.id}"
+                                            )
+                                        )
+                                    },
+                                imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                title = null,
+                                release = null,
+                                rating = null
                             )
                         }
                     })
                 }
-            })
+            }
         }
     }
 }

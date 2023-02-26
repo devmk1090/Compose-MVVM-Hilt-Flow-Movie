@@ -2,6 +2,7 @@ package com.bhdev1215.movieinfo3.screens.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -13,17 +14,20 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
+import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
 @Composable
 fun CommonDetail(
+    navController: NavController,
     item: Resource<MovieDetailResponse>,
     videoList: ArrayList<VideoItems>,
     creditList: ArrayList<Cast>,
@@ -38,13 +42,13 @@ fun CommonDetail(
             painter = rememberImagePainter(
                 data = Constants.IMAGE_BASE_URL + data!!.posterPath,
                 builder = {
-                    placeholder(R.drawable.ic_github)
                     crossfade(true)
                 }
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .height(585.dp),
+                .height(585.dp)
+                .cornerRadius10(),
             contentScale = ContentScale.FillWidth,
             contentDescription = "Poster"
         )
@@ -89,6 +93,28 @@ fun CommonDetail(
                     percentage = data.voteAverage!!.toFloat(),
                 )
             }
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "장르",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+                LazyRow {
+                    items(data.genres!!.size) { it ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 4.dp),
+                            text = data.genres[it].name,
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraLight,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 modifier = Modifier
@@ -101,7 +127,7 @@ fun CommonDetail(
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            CreditScreen(creditList, crewList)
+            CreditScreen(navController, creditList, crewList)
         }
     }
 }

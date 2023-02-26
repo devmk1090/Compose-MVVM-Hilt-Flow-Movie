@@ -13,15 +13,19 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
+import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
+import timber.log.Timber
 
 @Composable
 fun CreditScreen(
+    navController: NavController,
     creditList: ArrayList<Cast>,
     crewList: ArrayList<Crew>
     ) {
@@ -46,8 +50,8 @@ fun CreditScreen(
                     Image(
                         painter = rememberImagePainter(Constants.IMAGE_BASE_URL.plus(item.profilePath),
                             builder = {
-                                placeholder(R.drawable.ic_person_white)
-                                error(R.drawable.ic_person_white)
+                                placeholder(R.drawable.ic_person_placeholder)
+                                error(R.drawable.ic_person_placeholder)
                             }),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
@@ -57,9 +61,9 @@ fun CreditScreen(
                             .width(80.dp)
                             .cornerRadius10()
                             .clickable {
-
+                                Timber.d("${item.id}")
+                                navController.navigate(NavigationObject.CastDetail.CAST_DETAIL.plus("/${item.id}"))
                             }
-
                     )
                     Text(
                         text = item.name,
@@ -94,8 +98,8 @@ fun CreditScreen(
                     Image(
                         painter = rememberImagePainter(Constants.IMAGE_BASE_URL.plus(item.profilePath),
                             builder = {
-                                placeholder(R.drawable.ic_person_white)
-                                error(R.drawable.ic_person_white)
+                                placeholder(R.drawable.ic_person_placeholder)
+                                error(R.drawable.ic_person_placeholder)
                             }),
                         contentDescription = null,
                         contentScale = ContentScale.FillBounds,
@@ -104,10 +108,6 @@ fun CreditScreen(
                             .height(120.dp)
                             .width(80.dp)
                             .cornerRadius10()
-                            .clickable {
-
-                            }
-
                     )
                     Text(
                         text = item.name,

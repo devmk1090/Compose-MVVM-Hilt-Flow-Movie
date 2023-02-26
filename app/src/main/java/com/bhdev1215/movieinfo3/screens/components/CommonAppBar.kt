@@ -7,6 +7,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,8 +26,8 @@ fun CommonAppBar(
 ) {
     TopAppBar(
         title = title,
-        navigationIcon = if (showBackArrow) {
-            {
+        navigationIcon = {
+            if (showBackArrow) {
                 IconButton(onClick = {
                     navController.popBackStack()
                 }) {
@@ -36,8 +37,18 @@ fun CommonAppBar(
                         tint = Color.White
                     )
                 }
+            } else {
+                IconButton(onClick = {
+
+                }) {
+                    Icon(
+                        imageVector = Icons.Filled.Menu,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
             }
-        } else null,
+        },
         actions = navActions,
         backgroundColor = MaterialTheme.colors.primary,
         elevation = 5.dp
