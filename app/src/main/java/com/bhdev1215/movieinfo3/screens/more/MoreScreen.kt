@@ -9,7 +9,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -34,6 +36,8 @@ fun MoreScreen(
 ) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
+    val coroutineScope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
 
     Column {
         CommonAppBar(
@@ -42,7 +46,9 @@ fun MoreScreen(
             },
             modifier = Modifier.fillMaxWidth(),
             showBackArrow = true,
-            navController = navController
+            navController = navController,
+            coroutineScope = coroutineScope,
+            scaffoldState = scaffoldState
         )
         LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
             items(trendingMovieList.itemCount) { it ->
