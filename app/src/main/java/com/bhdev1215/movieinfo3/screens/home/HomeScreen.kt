@@ -7,8 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -32,12 +31,13 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    navController: NavController
+    navController: NavController,
 ) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
+    var showAlertDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -129,9 +129,43 @@ fun HomeScreen(
         }
     }
 
-    BackHandler {
+    if (showAlertDialog) {
+        OnBackDialog(
+            onDismissRequest = { showAlertDialog = false },
+            onConfirmClick = {  }
+        )
+    }
+
+    BackHandler(enabled = true) {
         coroutineScope.launch {
             scaffoldState.drawerState.close()
+            if (scaffoldState.drawerState.isClosed) {
+                showAlertDialog = true
+            }
         }
     }
+}
+
+@Composable
+fun OnBackDialog(onConfirmClick: () -> Unit, onDismissRequest: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismissRequest,
+        title = {
+            Text(text = "종료하시겠습니까?", fontSize = 16.sp, color = Color.White)
+        },
+        text = {
+            Text(text = "확인을 누르면 앱이 종료됩니다.", fontSize = 16.sp, color = Color.White)
+
+        },
+        confirmButton = {
+                        TextButton(onClick = { onConfirmClick() }) {
+                            Text(text = "확인", fontSize = 16.sp, color = Color.White)
+                        }
+        },
+        dismissButton = {
+            TextButton(onClick = { onDismissRequest() }) {
+                Text(text = "취소", fontSize = 16.sp, color = Color.White)
+            }
+        }
+    )
 }
