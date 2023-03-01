@@ -23,7 +23,7 @@ import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
-import com.bhdev1215.movieinfo3.screens.components.NavigationDrawer
+import com.bhdev1215.movieinfo3.screens.components.drawer.NavigationDrawer
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
 import com.bhdev1215.movieinfo3.util.Constants.IMAGE_BASE_URL
 import kotlinx.coroutines.launch
@@ -32,6 +32,7 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navController: NavController,
+    currentScreen: String,
 ) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
@@ -70,7 +71,7 @@ fun HomeScreen(
             scaffoldState = scaffoldState,
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             drawerContent = {
-                NavigationDrawer {
+                NavigationDrawer(currentScreen = NavigationObject.HOME) {
                     coroutineScope.launch {
                         scaffoldState.drawerState.close()
                     }
@@ -132,14 +133,16 @@ fun HomeScreen(
     if (showAlertDialog) {
         OnBackDialog(
             onDismissRequest = { showAlertDialog = false },
-            onConfirmClick = {  }
+            onConfirmClick = {
+                //TODO finish() or navigateUp()
+            }
         )
     }
 
-    BackHandler(enabled = true) {
+    BackHandler {
         coroutineScope.launch {
             scaffoldState.drawerState.close()
-            if (scaffoldState.drawerState.isClosed) {
+            if (scaffoldState.drawerState.isOpen) {
                 showAlertDialog = true
             }
         }
@@ -158,9 +161,9 @@ fun OnBackDialog(onConfirmClick: () -> Unit, onDismissRequest: () -> Unit) {
 
         },
         confirmButton = {
-                        TextButton(onClick = { onConfirmClick() }) {
-                            Text(text = "확인", fontSize = 16.sp, color = Color.White)
-                        }
+            TextButton(onClick = { onConfirmClick() }) {
+                Text(text = "확인", fontSize = 16.sp, color = Color.White)
+            }
         },
         dismissButton = {
             TextButton(onClick = { onDismissRequest() }) {
