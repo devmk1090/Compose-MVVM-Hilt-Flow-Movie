@@ -49,13 +49,13 @@ fun NavigationDrawer(
 @Composable
 private fun createDrawerItem(currentScreen: String) = listOf(
     NavigationDrawerItem(
-        image = painterResource(R.drawable.ic_search),
+        image = painterResource(R.drawable.ic_baseline_movie_24),
         isSelected = currentScreen == NavigationObject.HOME,
-        title = "Home"
+        title = "home"
     ),
     NavigationDrawerItem(
-        image = painterResource(R.drawable.ic_search),
+        image = painterResource(R.drawable.ic_baseline_tv_24),
         isSelected = currentScreen == NavigationObject.TV,
-        title = "Search"
+        title = "tv"
     )
 )

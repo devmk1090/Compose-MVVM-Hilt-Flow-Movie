@@ -27,6 +27,7 @@ import com.bhdev1215.movieinfo3.screens.components.drawer.NavigationDrawer
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
 import com.bhdev1215.movieinfo3.util.Constants.IMAGE_BASE_URL
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 @Composable
 fun HomeScreen(
@@ -40,90 +41,101 @@ fun HomeScreen(
     val scaffoldState = rememberScaffoldState()
     var showAlertDialog by remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        Scaffold(
-            topBar = {
-                CommonAppBar(
-                    title = {
-                        Column {
-                            //TODO '영화' , 'TV' 텍스트
-
-                        }
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    showBackArrow = false,
-                    navActions = {
-                        IconButton(onClick = { /*TODO SEARCH*/ }) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_search),
-                                contentDescription = null,
-                                tint = primaryGray
-                            )
-                        }
-                    },
-                    navController = navController,
-                    coroutineScope = coroutineScope,
-                    scaffoldState = scaffoldState
-                )
-            },
-            scaffoldState = scaffoldState,
-            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
-            drawerContent = {
-                NavigationDrawer(currentScreen = NavigationObject.HOME) {
-                    coroutineScope.launch {
-                        scaffoldState.drawerState.close()
-                    }
-                }
-            }
+    Timber.d("current : $currentScreen")
+    if (currentScreen == NavigationObject.TV) {
+        Column(
+            modifier = Modifier.fillMaxSize()
         ) {
-            LazyColumn {
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 4.dp, end = 4.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
-                        ClickableText(
-                            text = AnnotatedString("더보기"),
-                            style = TextStyle(
-                                color = Color.White,
-                                fontSize = 18.sp
-                            ),
-                            onClick = {
-                                navController.navigate(NavigationObject.MORE)
-                            })
-                    }
-                    Spacer(modifier = Modifier.height(8.dp))
-                }
-                item {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .height(215.dp)
-                    ) {
-                        LazyRow(content = {
-                            items(trendingMovieList) { it ->
-                                MovieItem(
-                                    modifier = Modifier
-                                        .width(150.dp)
-                                        .clickable {
-                                            navController.navigate(
-                                                NavigationObject.Detail.MOVIE_DETAIL.plus(
-                                                    "/${it?.id}"
-                                                )
-                                            )
-                                        },
-                                    imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
-                                    title = null,
-                                    release = null,
-                                    rating = null
+            Text(text = "this is tv screen")
+        }
+    } else {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            Scaffold(
+                topBar = {
+                    CommonAppBar(
+                        title = {
+                            Column {
+                                //TODO '영화' , 'TV' 텍스트
+
+                            }
+                        },
+                        modifier = Modifier.fillMaxWidth(),
+                        showBackArrow = false,
+                        navActions = {
+                            IconButton(onClick = { /*TODO SEARCH*/ }) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_search),
+                                    contentDescription = null,
+                                    tint = primaryGray
                                 )
                             }
-                        })
+                        },
+                        navController = navController,
+                        coroutineScope = coroutineScope,
+                        scaffoldState = scaffoldState
+                    )
+                },
+                scaffoldState = scaffoldState,
+                drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+                drawerContent = {
+                    NavigationDrawer(currentScreen = currentScreen) {
+                        Timber.d("it : $it")
+                        coroutineScope.launch {
+                            scaffoldState.drawerState.close()
+                        }
+                        navController.navigate(it)
+                    }
+                }
+            ) {
+                LazyColumn {
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 4.dp, end = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
+                            ClickableText(
+                                text = AnnotatedString("더보기"),
+                                style = TextStyle(
+                                    color = Color.White,
+                                    fontSize = 18.sp
+                                ),
+                                onClick = {
+                                    navController.navigate(NavigationObject.MORE)
+                                })
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(215.dp)
+                        ) {
+                            LazyRow(content = {
+                                items(trendingMovieList) { it ->
+                                    MovieItem(
+                                        modifier = Modifier
+                                            .width(150.dp)
+                                            .clickable {
+                                                navController.navigate(
+                                                    NavigationObject.Detail.MOVIE_DETAIL.plus(
+                                                        "/${it?.id}"
+                                                    )
+                                                )
+                                            },
+                                        imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                        title = null,
+                                        release = null,
+                                        rating = null
+                                    )
+                                }
+                            })
+                        }
                     }
                 }
             }

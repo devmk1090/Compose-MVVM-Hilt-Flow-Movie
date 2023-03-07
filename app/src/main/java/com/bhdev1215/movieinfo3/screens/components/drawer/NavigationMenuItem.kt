@@ -23,7 +23,7 @@ fun NavigationMenuItem(
     itemClick: () -> Unit
 ) {
     val texColor = if (item.isSelected) Color.Black else Color.White
-    val backgroundColor = if (item.isSelected) Color.Yellow else Color.Transparent
+    val backgroundColor = if (item.isSelected) Color.Green else Color.Transparent
 
     Surface(
         modifier = Modifier
