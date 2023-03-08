@@ -10,9 +10,7 @@ import androidx.paging.filter
 import com.bhdev1215.movieinfo3.data.repository.MovieRepository
 import com.bhdev1215.movieinfo3.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -34,6 +32,12 @@ class HomeViewModel @Inject constructor(
     private fun getTrendingMovies() {
         viewModelScope.launch {
             _trendingMovieList.value = moviesRepository.getTrendingWeekMovies().cachedIn(viewModelScope)
+        }
+    }
+
+    fun searchApi(searchKey: String) {
+        viewModelScope.launch {
+           
         }
     }
 }

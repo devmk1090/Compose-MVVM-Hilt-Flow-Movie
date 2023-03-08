@@ -14,6 +14,8 @@ import retrofit2.http.Query
 
 interface TMDBApi {
 
+    // /trending/{media_type}/{time_window}
+    // media_type : all, movie, tv, person
     @GET("trending/movie/week")
     suspend fun getTrendingWeekMovies(
         @Query("page") page: Int = PAGING_INDEX,
@@ -55,4 +57,12 @@ interface TMDBApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"
     ): CastFilmography
+
+    @GET("search/movie")
+    suspend fun getSearch(
+        @Query("query") searchKey: String,
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): MovieResponse
 }

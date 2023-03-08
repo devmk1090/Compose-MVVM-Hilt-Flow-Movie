@@ -42,53 +42,50 @@ fun HomeScreen(
     var showAlertDialog by remember { mutableStateOf(false) }
 
     Timber.d("current : $currentScreen")
-    if (currentScreen == NavigationObject.TV) {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Text(text = "this is tv screen")
-        }
-    } else {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            Scaffold(
-                topBar = {
-                    CommonAppBar(
-                        title = {
-                            Column {
-                                //TODO '영화' , 'TV' 텍스트
-
-                            }
-                        },
-                        modifier = Modifier.fillMaxWidth(),
-                        showBackArrow = false,
-                        navActions = {
-                            IconButton(onClick = { /*TODO SEARCH*/ }) {
-                                Icon(
-                                    painter = painterResource(id = R.drawable.ic_search),
-                                    contentDescription = null,
-                                    tint = primaryGray
-                                )
-                            }
-                        },
-                        navController = navController,
-                        coroutineScope = coroutineScope,
-                        scaffoldState = scaffoldState
-                    )
-                },
-                scaffoldState = scaffoldState,
-                drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
-                drawerContent = {
-                    NavigationDrawer(currentScreen = currentScreen) {
-                        Timber.d("it : $it")
-                        coroutineScope.launch {
-                            scaffoldState.drawerState.close()
+    Column(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Scaffold(
+            topBar = {
+                CommonAppBar(
+                    title = {
+                        Text(text = currentScreen, color = Color.White, fontSize = 18.sp)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    showBackArrow = false,
+                    navActions = {
+                        IconButton(onClick = { /*TODO SEARCH*/ }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.ic_search),
+                                contentDescription = null,
+                                tint = primaryGray
+                            )
                         }
-                        navController.navigate(it)
+                    },
+                    navController = navController,
+                    coroutineScope = coroutineScope,
+                    scaffoldState = scaffoldState
+                )
+            },
+            scaffoldState = scaffoldState,
+            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
+            drawerContent = {
+                NavigationDrawer(currentScreen = currentScreen) {
+                    Timber.d("it : $it")
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                    navController.navigate(it)
+                }
+            }
+        ) {
+            if (currentScreen == NavigationObject.TV) {
+                LazyColumn {
+                    item {
+                        Text(text = "this is tv screen")
                     }
                 }
-            ) {
+            } else {
                 LazyColumn {
                     item {
                         Row(
