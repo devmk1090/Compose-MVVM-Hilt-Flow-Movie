@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -42,6 +44,8 @@ fun CastDetailScreen(
 
     val data = castDetail.data
     val castFilmographyList = castFilmography.data?.cast
+    val coroutineScope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
 
     Box {
         if (castDetail is Resource.Success && castFilmography is Resource.Success) {
@@ -52,7 +56,9 @@ fun CastDetailScreen(
                     },
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = true,
-                    navController = navController
+                    navController = navController,
+                    coroutineScope = coroutineScope,
+                    scaffoldState = scaffoldState
                 )
                 Column(
                     modifier = Modifier

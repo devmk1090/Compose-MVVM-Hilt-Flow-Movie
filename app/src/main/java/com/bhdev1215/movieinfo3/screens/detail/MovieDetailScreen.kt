@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
@@ -35,6 +37,9 @@ fun MovieDetailScreen(
         value = viewModel.getMovieCredit(id)
     }.value
 
+    val coroutineScope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
+
     Box {
         if (detail is Resource.Success && videos is Resource.Success && credits is Resource.Success) {
             Column {
@@ -44,7 +49,9 @@ fun MovieDetailScreen(
                     },
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = true,
-                    navController = navController
+                    navController = navController,
+                    coroutineScope = coroutineScope,
+                    scaffoldState = scaffoldState
                 )
 
                 //Detail

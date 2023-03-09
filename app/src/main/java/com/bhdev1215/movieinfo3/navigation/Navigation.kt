@@ -13,16 +13,20 @@ import com.bhdev1215.movieinfo3.screens.more.MoreScreen
 
 @Composable
 fun Navigation(
-    navController: NavHostController) {
+    navController: NavHostController,
+) {
     NavHost(navController, startDestination = "home") {
         composable(NavigationObject.HOME) {
-            HomeScreen(navController = navController)
+            HomeScreen(navController = navController, currentScreen = NavigationObject.HOME)
         }
         composable(NavigationObject.MORE) {
             MoreScreen(navController = navController)
         }
         composable(NavigationObject.CAST) {
 
+        }
+        composable(NavigationObject.TV) {
+            HomeScreen(navController = navController, currentScreen = NavigationObject.TV)
         }
         composable(
             NavigationObject.Detail.MOVIE_DETAIL.plus(NavigationObject.Detail.MOVIE_DETAIL_PATH),
