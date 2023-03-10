@@ -10,6 +10,7 @@ import com.bhdev1215.movieinfo3.screens.components.CastDetailScreen
 import com.bhdev1215.movieinfo3.screens.detail.MovieDetailScreen
 import com.bhdev1215.movieinfo3.screens.home.HomeScreen
 import com.bhdev1215.movieinfo3.screens.more.MoreScreen
+import com.bhdev1215.movieinfo3.screens.search.SearchScreen
 
 @Composable
 fun Navigation(
@@ -27,6 +28,9 @@ fun Navigation(
         }
         composable(NavigationObject.TV) {
             HomeScreen(navController = navController, currentScreen = NavigationObject.TV)
+        }
+        composable(NavigationObject.SEARCH) {
+            SearchScreen(navController = navController)
         }
         composable(
             NavigationObject.Detail.MOVIE_DETAIL.plus(NavigationObject.Detail.MOVIE_DETAIL_PATH),

@@ -54,7 +54,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = false,
                     navActions = {
-                        IconButton(onClick = { /*TODO SEARCH*/ }) {
+                        IconButton(onClick = { navController.navigate(NavigationObject.SEARCH) }) {
                             Icon(
                                 painter = painterResource(id = R.drawable.ic_search),
                                 contentDescription = null,
