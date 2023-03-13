@@ -1,39 +1,43 @@
 package com.bhdev1215.movieinfo3.screens.search
 
-import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.bhdev1215.movieinfo3.data.remote.response.MovieResponse
-import com.bhdev1215.movieinfo3.data.repository.MovieRepository
-import com.bhdev1215.movieinfo3.util.Resource
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import androidx.paging.filter
+import com.bhdev1215.movieinfo3.data.repository.SearchRepository
+import com.bhdev1215.movieinfo3.model.Search
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val moviesRepository: MovieRepository
+    private val searchRepository: SearchRepository
 ) : ViewModel() {
 
-    val searchData: MutableState<Resource<MovieResponse>?> = mutableStateOf(null)
+    private val _resetSearchTerm = mutableStateOf("")
+    val resetSearchTerm: State<String> = _resetSearchTerm
 
-    fun getSearch(searchKey: String) {
+    fun resetSearchTerm(term: String) {
+        _resetSearchTerm.value = term
+    }
+
+    private val _searchResult = mutableStateOf<Flow<PagingData<Search>>>(emptyFlow())
+    val searchResult: State<Flow<PagingData<Search>>> = _searchResult
+
+    fun getSearchResult(queryText: String) {
         viewModelScope.launch {
-            flowOf(searchKey).debounce(300)
-                .filter {
-                    it.trim().isEmpty().not()
+            _searchResult.value = searchRepository.getSearch(queryText).map { data ->
+                data.filter {
+                    it.title != null
                 }
-                .distinctUntilChanged()
-                .flatMapLatest {
-                    moviesRepository.getSearch(it)
-                }.collect {
-                    if (it is Resource.Success) {
-                        it.data
-                    }
-                    searchData.value = it
-                }
+            }.cachedIn(viewModelScope)
         }
     }
 }

@@ -1,7 +1,7 @@
 package com.bhdev1215.movieinfo3.screens.search
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -22,19 +22,28 @@ fun SearchScreen(
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
 
-    Box {
-        Column {
-            CommonAppBar(
-                title = {
-                    Text(text = "검색", color = Color.White, fontSize = 18.sp)
-                },
-                modifier = Modifier.fillMaxWidth(),
-                showBackArrow = true,
-                navController = navController,
-                coroutineScope = coroutineScope,
-                scaffoldState = scaffoldState
-            )
-            Text(text = "this is search screen")
-        }
+    Column(
+        Modifier.fillMaxSize()
+    ) {
+        CommonAppBar(
+            title = {
+                Text(text = "검색", color = Color.White, fontSize = 18.sp)
+            },
+            modifier = Modifier.fillMaxWidth(),
+            showBackArrow = true,
+            navController = navController,
+            coroutineScope = coroutineScope,
+            scaffoldState = scaffoldState
+        )
+        Text(text = "this is search screen")
     }
+}
+
+@Composable
+fun SearchArea(
+    viewModel: SearchViewModel,
+    modifier: Modifier = Modifier,
+    onSearch: (String) -> Unit = {}
+) {
+
 }

@@ -3,6 +3,7 @@ package com.bhdev1215.movieinfo3.data.remote
 import com.bhdev1215.movieinfo3.BuildConfig.API_KEY
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.data.remote.response.MovieResponse
+import com.bhdev1215.movieinfo3.data.remote.response.SearchResponse
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.model.artist.Credit
@@ -58,11 +59,11 @@ interface TMDBApi {
         @Query("language") language: String = "ko"
     ): CastFilmography
 
-    @GET("search/movie")
-    suspend fun getSearch(
-        @Query("query") searchKey: String,
+    @GET("search/multi")
+    suspend fun getMultiSearch(
+        @Query("query") searchQuery: String,
         @Query("page") page: Int = PAGING_INDEX,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"
-    ): MovieResponse
+    ): SearchResponse
 }
