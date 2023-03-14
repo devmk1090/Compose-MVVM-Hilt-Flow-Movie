@@ -39,22 +39,4 @@ class HomeViewModel @Inject constructor(
             _trendingMovieList.value = moviesRepository.getTrendingWeekMovies().cachedIn(viewModelScope)
         }
     }
-
-    fun getSearch(searchKey: String) {
-        viewModelScope.launch {
-            flowOf(searchKey).debounce(300)
-                .filter {
-                    it.trim().isEmpty().not()
-                }
-                .distinctUntilChanged()
-                .flatMapLatest {
-                    moviesRepository.getSearch(it)
-                }.collect {
-                    if (it is Resource.Success) {
-                        it.data
-                    }
-                    searchData.value = it
-                }
-        }
-    }
 }
