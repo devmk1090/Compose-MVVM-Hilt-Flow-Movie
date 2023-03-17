@@ -5,6 +5,7 @@ object NavigationObject {
     const val MORE = "more"
     const val CAST = "cast"
     const val TV = "tv"
+    const val SEARCH = "search"
 
     object Detail {
         const val MOVIE_DETAIL = "movieDetail"
