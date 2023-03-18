@@ -37,6 +37,7 @@ fun HomeScreen(
 ) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
+    val trendingTvList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     var showAlertDialog by remember { mutableStateOf(false) }
@@ -82,7 +83,27 @@ fun HomeScreen(
             if (currentScreen == NavigationObject.TV) {
                 LazyColumn {
                     item {
-                        Text(text = "this is tv screen")
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 4.dp, end = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
+                            ClickableText(
+                                text = AnnotatedString("더보기"),
+                                style = TextStyle(
+                                    color = Color.White,
+                                    fontSize = 18.sp
+                                ),
+                                onClick = {
+
+                            })
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    item {
+                        
                     }
                 }
             } else {

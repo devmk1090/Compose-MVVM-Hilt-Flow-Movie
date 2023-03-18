@@ -4,6 +4,7 @@ import com.bhdev1215.movieinfo3.BuildConfig.API_KEY
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.data.remote.response.MovieResponse
 import com.bhdev1215.movieinfo3.data.remote.response.SearchResponse
+import com.bhdev1215.movieinfo3.data.remote.response.TvResponse
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.model.artist.Credit
@@ -66,4 +67,14 @@ interface TMDBApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"
     ): SearchResponse
+
+
+    //TV
+
+    @GET("trending/tv/week")
+    suspend fun getTrendingWeekTv(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvResponse
 }
