@@ -1,10 +1,7 @@
 package com.bhdev1215.movieinfo3.data.remote
 
 import com.bhdev1215.movieinfo3.BuildConfig.API_KEY
-import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
-import com.bhdev1215.movieinfo3.data.remote.response.MovieResponse
-import com.bhdev1215.movieinfo3.data.remote.response.SearchResponse
-import com.bhdev1215.movieinfo3.data.remote.response.TvResponse
+import com.bhdev1215.movieinfo3.data.remote.response.*
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.model.artist.Credit
@@ -77,4 +74,11 @@ interface TMDBApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"
     ): TvResponse
+
+    @GET("tv/{tv_id}")
+    suspend fun getTvDetail(
+        @Path("tv_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvDetailResponse
 }

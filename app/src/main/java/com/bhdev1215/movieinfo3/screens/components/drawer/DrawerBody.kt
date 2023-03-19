@@ -11,7 +11,6 @@ fun DrawerBody(
     itemClick: (String) -> Unit,
 ) {
     NavigationMenuItem(item = item) {
-        Timber.d("item : $item")
         itemClick(item.title)
     }
 }

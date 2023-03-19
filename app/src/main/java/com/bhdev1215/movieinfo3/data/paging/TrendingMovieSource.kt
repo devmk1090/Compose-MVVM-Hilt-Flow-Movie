@@ -17,7 +17,6 @@ class TrendingMovieSource(private val api: TMDBApi): PagingSource<Int, Movie>() 
         return try {
             val nextPage = params.key ?: 1
             val trendingMovieList = api.getTrendingWeekMovies(nextPage)
-            Timber.d("list: ${trendingMovieList.searches}")
             LoadResult.Page(
                 data = trendingMovieList.searches,
                 prevKey = if (nextPage == 1) null else nextPage -1,

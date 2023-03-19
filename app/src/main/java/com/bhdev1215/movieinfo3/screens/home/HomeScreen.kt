@@ -72,7 +72,6 @@ fun HomeScreen(
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             drawerContent = {
                 NavigationDrawer(currentScreen = currentScreen) {
-                    Timber.d("it : $it")
                     coroutineScope.launch {
                         scaffoldState.drawerState.close()
                     }
@@ -103,7 +102,31 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.height(8.dp))
                     }
                     item {
-                        
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(215.dp)
+                        ) {
+                            LazyRow(content = {
+                                items(trendingTvList) { it ->
+                                    MovieItem(
+                                        modifier = Modifier
+                                            .width(150.dp)
+                                            .clickable {
+                                                navController.navigate(
+                                                    NavigationObject.Detail.TV_DETAIL.plus(
+                                                        "/${it?.id}"
+                                                    )
+                                                )
+                                            },
+                                        imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                        title = null,
+                                        release = null,
+                                        rating = null
+                                    )
+                                }
+                            })
+                        }
                     }
                 }
             } else {

@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.bhdev1215.movieinfo3.screens.components.CastDetailScreen
 import com.bhdev1215.movieinfo3.screens.detail.MovieDetailScreen
+import com.bhdev1215.movieinfo3.screens.detail.TvDetailScreen
 import com.bhdev1215.movieinfo3.screens.home.HomeScreen
 import com.bhdev1215.movieinfo3.screens.more.MoreScreen
 import com.bhdev1215.movieinfo3.screens.search.SearchScreen
@@ -41,6 +42,17 @@ fun Navigation(
             val movieId = it.arguments?.getInt(NavigationObject.Detail.MOVIE_ITEM)
             if (movieId != null) {
                 MovieDetailScreen(id = movieId, navController = navController)
+            }
+        }
+        composable(
+            NavigationObject.Detail.TV_DETAIL.plus(NavigationObject.Detail.TV_DETAIL_PATH),
+            arguments = listOf(navArgument(NavigationObject.Detail.TV_ITEM) {
+                type = NavType.IntType
+            })
+        ) {
+            val tvId = it.arguments?.getInt(NavigationObject.Detail.TV_ITEM)
+            if (tvId != null) {
+                TvDetailScreen(id = tvId, navController = navController)
             }
         }
         composable(

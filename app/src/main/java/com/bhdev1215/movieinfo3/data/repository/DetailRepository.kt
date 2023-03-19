@@ -2,6 +2,7 @@ package com.bhdev1215.movieinfo3.data.repository
 
 import com.bhdev1215.movieinfo3.data.remote.TMDBApi
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
+import com.bhdev1215.movieinfo3.data.remote.response.TvDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.model.artist.Credit
@@ -15,7 +16,7 @@ class DetailRepository @Inject constructor(private val api: TMDBApi) {
         val response = try {
             api.getMovieDetail(movieId)
         } catch (e: Exception) {
-            return Resource.Error("Error occurred")
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
         }
         return Resource.Success(response)
     }
@@ -24,7 +25,7 @@ class DetailRepository @Inject constructor(private val api: TMDBApi) {
         val response = try {
             api.getMovieVideos(movieId)
         } catch (e: Exception) {
-            return Resource.Error("Error occurred")
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
         }
         return Resource.Success(response)
     }
@@ -33,7 +34,7 @@ class DetailRepository @Inject constructor(private val api: TMDBApi) {
         val response = try {
             api.getMovieCredit(movieId)
         } catch (e: Exception) {
-            return Resource.Error("Error occurred")
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
         }
         return Resource.Success(response)
     }
@@ -42,7 +43,7 @@ class DetailRepository @Inject constructor(private val api: TMDBApi) {
         val response = try {
             api.getCastDetail(personId)
         } catch (e: Exception) {
-            return Resource.Error("Error occurred")
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
         }
         return Resource.Success(response)
     }
@@ -53,6 +54,16 @@ class DetailRepository @Inject constructor(private val api: TMDBApi) {
             api.getCastFilmography(personId)
         } catch (e: Exception) {
             return Resource.Error("Error occurred")
+        }
+        return Resource.Success(response)
+    }
+
+    //Tv
+    suspend fun getTvDetail(tvId: Int): Resource<TvDetailResponse> {
+        val response = try {
+            api.getTvDetail(tvId)
+        } catch (e: Exception) {
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
         }
         return Resource.Success(response)
     }

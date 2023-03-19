@@ -11,6 +11,10 @@ object NavigationObject {
         const val MOVIE_DETAIL = "movieDetail"
         const val MOVIE_ITEM = "movieItem"
         const val MOVIE_DETAIL_PATH = "/{movieItem}"
+
+        const val TV_DETAIL = "tvDetail"
+        const val TV_ITEM = "tvItem"
+        const val TV_DETAIL_PATH = "/{tvItem}"
     }
     object CastDetail {
         const val CAST_DETAIL = "castDetail"
