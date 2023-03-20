@@ -67,4 +67,23 @@ class DetailRepository @Inject constructor(private val api: TMDBApi) {
         }
         return Resource.Success(response)
     }
+
+    suspend fun getTvVideos(tvId: Int): Resource<Videos> {
+        val response = try {
+            api.getTvVideos(tvId)
+        } catch (e: Exception) {
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
+        }
+        return Resource.Success(response)
+    }
+
+    suspend fun getTvCredits(tvId: Int): Resource<Credit> {
+        val response = try {
+            api.getTvCredits(tvId)
+        } catch (e: Exception) {
+            return Resource.Error("데이터를 가져오는데 실패했습니다.")
+        }
+        return Resource.Success(response)
+    }
+
 }

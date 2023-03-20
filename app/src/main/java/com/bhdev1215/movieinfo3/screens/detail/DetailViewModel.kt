@@ -42,4 +42,12 @@ class DetailViewModel @Inject constructor(
     suspend fun getTvDetail(tvId: Int): Resource<TvDetailResponse> {
         return repository.getTvDetail(tvId)
     }
+
+    suspend fun getTvVideos(tvId: Int): Resource<Videos> {
+        return repository.getMovieVideos(tvId)
+    }
+
+    suspend fun getTvCredits(tvId: Int): Resource<Credit> {
+        return repository.getMovieCredit(tvId)
+    }
 }
