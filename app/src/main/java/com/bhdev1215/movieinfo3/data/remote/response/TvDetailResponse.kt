@@ -2,6 +2,7 @@ package com.bhdev1215.movieinfo3.data.remote.response
 
 
 import com.bhdev1215.movieinfo3.model.Genre
+import com.bhdev1215.movieinfo3.model.Network
 import com.google.gson.annotations.SerializedName
 
 data class TvDetailResponse(
@@ -29,6 +30,8 @@ data class TvDetailResponse(
     val name: String,
     @SerializedName("next_episode_to_air")
     val nextEpisodeToAir: Any,
+    @SerializedName("networks")
+    val networks: List<Network>,
     @SerializedName("number_of_episodes")
     val numberOfEpisodes: Int,
     @SerializedName("number_of_seasons")

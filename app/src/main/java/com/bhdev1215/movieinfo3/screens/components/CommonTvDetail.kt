@@ -20,7 +20,9 @@ import com.bhdev1215.movieinfo3.data.remote.response.TvDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
+import com.bhdev1215.movieinfo3.ui.theme.Typography
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
@@ -56,42 +58,77 @@ fun CommonTvDetail(
 
             VideoScreen(videoList)
 
-            Spacer(modifier = Modifier.height(10.dp))
-
-            Text(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                text = data.name,
-                color = Color.White,
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold
-            )
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     modifier = Modifier
-                        .fillMaxWidth(0.13f),
-                    text = "개봉일",
+                        .fillMaxWidth(0.75f),
+                    text = data.name,
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                VoteAverageIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth(0.25f)
+                        .padding(bottom = 12.dp),
+                    percentage = data.voteAverage.toFloat(),
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "방영정보",
                     fontSize = 16.sp,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
                 )
                 Text(
                     modifier = Modifier
-                        .fillMaxWidth(0.72f),
+                        .padding(start = 8.dp),
                     text = data.firstAirDate,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.ExtraLight,
                     color = Color.White
                 )
-                VoteAverageIndicator(
+                LazyRow {
+                    items(data.networks.size) { it ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 4.dp),
+                            text = ", ${data.networks[it].name}",
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.ExtraLight,
+                            color = Color.White
+                        )
+                    }
+                }
+                Text(
                     modifier = Modifier
-                        .fillMaxWidth(0.15f)
-                        .padding(bottom = 12.dp),
-                    percentage = data.voteAverage.toFloat(),
+                        .padding(start = 4.dp),
+                    text = ", ${data.numberOfSeasons}시즌",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.ExtraLight,
+                    color = Color.White
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(start = 4.dp),
+                    text = ", ${data.numberOfEpisodes}부작",
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.ExtraLight,
+                    color = Color.White
                 )
             }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -105,7 +142,7 @@ fun CommonTvDetail(
                     items(data.genres.size) { it ->
                         Text(
                             modifier = Modifier
-                                .padding(start = 4.dp),
+                                .padding(start = 8.dp),
                             text = data.genres[it].name,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.ExtraLight,
