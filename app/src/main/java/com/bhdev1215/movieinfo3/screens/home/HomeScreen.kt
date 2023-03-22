@@ -96,7 +96,7 @@ fun HomeScreen(
                                     fontSize = 18.sp
                                 ),
                                 onClick = {
-
+                                    navController.navigate(NavigationObject.MORE_TV)
                             })
                         }
                         Spacer(modifier = Modifier.height(8.dp))
@@ -146,7 +146,7 @@ fun HomeScreen(
                                     fontSize = 18.sp
                                 ),
                                 onClick = {
-                                    navController.navigate(NavigationObject.MORE)
+                                    navController.navigate(NavigationObject.MORE_MOVIE)
                                 })
                         }
                         Spacer(modifier = Modifier.height(8.dp))

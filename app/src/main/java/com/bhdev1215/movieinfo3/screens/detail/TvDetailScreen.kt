@@ -1,9 +1,6 @@
 package com.bhdev1215.movieinfo3.screens.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -12,22 +9,15 @@ import androidx.compose.runtime.produceState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import coil.compose.rememberImagePainter
 import com.bhdev1215.movieinfo3.data.remote.response.TvDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Credit
 import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
-import com.bhdev1215.movieinfo3.screens.components.CommonDetail
 import com.bhdev1215.movieinfo3.screens.components.CommonTvDetail
-import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
-import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
-import timber.log.Timber
 
 @Composable
 fun TvDetailScreen(
