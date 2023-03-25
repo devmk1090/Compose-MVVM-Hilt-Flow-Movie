@@ -2,6 +2,7 @@ package com.bhdev1215.movieinfo3.screens.detail
 
 import androidx.lifecycle.ViewModel
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
+import com.bhdev1215.movieinfo3.data.remote.response.TvDetailResponse
 import com.bhdev1215.movieinfo3.data.repository.DetailRepository
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
@@ -34,5 +35,19 @@ class DetailViewModel @Inject constructor(
 
     suspend fun getCastFilmography(personId: Int): Resource<CastFilmography> {
         return repository.getCastFilmography(personId)
+    }
+
+    //Tv
+
+    suspend fun getTvDetail(tvId: Int): Resource<TvDetailResponse> {
+        return repository.getTvDetail(tvId)
+    }
+
+    suspend fun getTvVideos(tvId: Int): Resource<Videos> {
+        return repository.getMovieVideos(tvId)
+    }
+
+    suspend fun getTvCredits(tvId: Int): Resource<Credit> {
+        return repository.getMovieCredit(tvId)
     }
 }

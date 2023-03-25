@@ -37,11 +37,13 @@ fun HomeScreen(
 ) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
+    val trendingTvList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
     var showAlertDialog by remember { mutableStateOf(false) }
 
-    Timber.d("current : $currentScreen")
+    val title = if (currentScreen == "home") "영화" else "티비 시리즈"
+    
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -49,7 +51,7 @@ fun HomeScreen(
             topBar = {
                 CommonAppBar(
                     title = {
-                        Text(text = currentScreen, color = Color.White, fontSize = 18.sp)
+                        Text(text = title, color = Color.White, fontSize = 18.sp)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = false,
@@ -71,7 +73,6 @@ fun HomeScreen(
             drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
             drawerContent = {
                 NavigationDrawer(currentScreen = currentScreen) {
-                    Timber.d("it : $it")
                     coroutineScope.launch {
                         scaffoldState.drawerState.close()
                     }
@@ -82,7 +83,51 @@ fun HomeScreen(
             if (currentScreen == NavigationObject.TV) {
                 LazyColumn {
                     item {
-                        Text(text = "this is tv screen")
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = 4.dp, end = 4.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
+                            ClickableText(
+                                text = AnnotatedString("더보기"),
+                                style = TextStyle(
+                                    color = Color.White,
+                                    fontSize = 18.sp
+                                ),
+                                onClick = {
+                                    navController.navigate(NavigationObject.MORE_TV)
+                            })
+                        }
+                        Spacer(modifier = Modifier.height(8.dp))
+                    }
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .height(215.dp)
+                        ) {
+                            LazyRow(content = {
+                                items(trendingTvList) { it ->
+                                    MovieItem(
+                                        modifier = Modifier
+                                            .width(150.dp)
+                                            .clickable {
+                                                navController.navigate(
+                                                    NavigationObject.Detail.TV_DETAIL.plus(
+                                                        "/${it?.id}"
+                                                    )
+                                                )
+                                            },
+                                        imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                        title = null,
+                                        release = null,
+                                        rating = null
+                                    )
+                                }
+                            })
+                        }
                     }
                 }
             } else {
@@ -102,7 +147,7 @@ fun HomeScreen(
                                     fontSize = 18.sp
                                 ),
                                 onClick = {
-                                    navController.navigate(NavigationObject.MORE)
+                                    navController.navigate(NavigationObject.MORE_MOVIE)
                                 })
                         }
                         Spacer(modifier = Modifier.height(8.dp))

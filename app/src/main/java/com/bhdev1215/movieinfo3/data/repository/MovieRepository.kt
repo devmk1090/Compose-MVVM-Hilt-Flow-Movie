@@ -13,7 +13,7 @@ class MovieRepository @Inject constructor(private val api: TMDBApi) {
 
     fun getTrendingWeekMovies(): Flow<PagingData<Movie>> {
         return Pager(
-            config = PagingConfig(enablePlaceholders = false, pageSize = 27),
+            config = PagingConfig(enablePlaceholders = false, pageSize = 20),
             pagingSourceFactory = {
                 TrendingMovieSource(api)
             }

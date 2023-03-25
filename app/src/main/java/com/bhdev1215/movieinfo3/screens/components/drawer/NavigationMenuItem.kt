@@ -45,7 +45,7 @@ fun NavigationMenuItem(
                 tint = texColor
             )
             Text(
-                text = item.title,
+                text = item.titleFormat(),
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Medium,
                 color = texColor,

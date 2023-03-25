@@ -21,15 +21,19 @@ import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.screens.home.HomeViewModel
 import com.bhdev1215.movieinfo3.util.Constants
+import timber.log.Timber
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun MoreScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    navController: NavController
-) {
+    navController: NavController,
+    currentScreen: String,
+    ) {
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
+    val trendingTvList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
+
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
 
@@ -44,20 +48,38 @@ fun MoreScreen(
             coroutineScope = coroutineScope,
             scaffoldState = scaffoldState
         )
-        LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
-            items(trendingMovieList.itemCount) { it ->
-                MovieItem(
-                    modifier = Modifier
-                        .height(285.dp)
-                        .clickable {
-                            navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${trendingMovieList[it]?.id}"))
-                        },
-                    imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingMovieList[it]?.posterPath}",
-                    title = null,
-                    release = null,
-                    rating = null
-                )
-            }
-        })
+        if (currentScreen == NavigationObject.HOME) {
+            LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
+                items(trendingMovieList.itemCount) { it ->
+                    MovieItem(
+                        modifier = Modifier
+                            .height(285.dp)
+                            .clickable {
+                                navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${trendingMovieList[it]?.id}"))
+                            },
+                        imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingMovieList[it]?.posterPath}",
+                        title = null,
+                        release = null,
+                        rating = null
+                    )
+                }
+            })
+        } else {
+            LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
+                items(trendingTvList.itemCount) { it ->
+                    MovieItem(
+                        modifier = Modifier
+                            .height(285.dp)
+                            .clickable {
+                                navController.navigate(NavigationObject.Detail.TV_DETAIL.plus("/${trendingTvList[it]?.id}"))
+                            },
+                        imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingTvList[it]?.posterPath}",
+                        title = null,
+                        release = null,
+                        rating = null
+                    )
+                }
+            })
+        }
     }
 }

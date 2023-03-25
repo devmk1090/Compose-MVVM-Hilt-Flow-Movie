@@ -14,7 +14,6 @@ import androidx.compose.ui.unit.dp
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.NavigationDrawerItem
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
-import com.bhdev1215.movieinfo3.screens.components.drawer.DrawerHeader
 
 @Composable
 fun NavigationDrawer(

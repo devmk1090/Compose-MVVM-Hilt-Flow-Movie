@@ -1,9 +1,7 @@
 package com.bhdev1215.movieinfo3.data.remote
 
 import com.bhdev1215.movieinfo3.BuildConfig.API_KEY
-import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
-import com.bhdev1215.movieinfo3.data.remote.response.MovieResponse
-import com.bhdev1215.movieinfo3.data.remote.response.SearchResponse
+import com.bhdev1215.movieinfo3.data.remote.response.*
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.model.artist.Credit
@@ -66,4 +64,35 @@ interface TMDBApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"
     ): SearchResponse
+
+
+    //TV
+
+    @GET("trending/tv/week")
+    suspend fun getTrendingWeekTv(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvResponse
+
+    @GET("tv/{tv_id}")
+    suspend fun getTvDetail(
+        @Path("tv_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvDetailResponse
+
+    @GET("tv/{tv_id}/videos")
+    suspend fun getTvVideos(
+        @Path("tv_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): Videos
+
+    @GET("tv/{tv_id}/credits")
+    suspend fun getTvCredits(
+        @Path("tv_id") movieId: Int,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): Credit
 }
