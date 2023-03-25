@@ -42,7 +42,8 @@ fun HomeScreen(
     val scaffoldState = rememberScaffoldState()
     var showAlertDialog by remember { mutableStateOf(false) }
 
-    Timber.d("current : $currentScreen")
+    val title = if (currentScreen == "home") "영화" else "티비 시리즈"
+    
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
@@ -50,7 +51,7 @@ fun HomeScreen(
             topBar = {
                 CommonAppBar(
                     title = {
-                        Text(text = currentScreen, color = Color.White, fontSize = 18.sp)
+                        Text(text = title, color = Color.White, fontSize = 18.sp)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = false,
