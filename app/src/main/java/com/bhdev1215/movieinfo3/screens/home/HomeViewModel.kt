@@ -24,11 +24,15 @@ class HomeViewModel @Inject constructor(
     private var _trendingMovieList = mutableStateOf<Flow<PagingData<Movie>>>(emptyFlow())
     val trendingMovieList: State<Flow<PagingData<Movie>>> = _trendingMovieList
 
+    private var _nowPlayingMovieList = mutableStateOf<Flow<PagingData<Movie>>>(emptyFlow())
+    val nowPlayingMovieList: State<Flow<PagingData<Movie>>> = _nowPlayingMovieList
+
     private val _trendingTvSeries = mutableStateOf<Flow<PagingData<TvSeries>>>(emptyFlow())
     val trendingTvSeries: State<Flow<PagingData<TvSeries>>> = _trendingTvSeries
 
     init {
         getTrendingMovies()
+        getNowPlyingMovies()
         getTrendingTv()
     }
 
@@ -42,6 +46,11 @@ class HomeViewModel @Inject constructor(
         }
     }
 
+    private fun getNowPlyingMovies() {
+        viewModelScope.launch {
+            _nowPlayingMovieList.value = moviesRepository.getNowPlayingMovies().cachedIn(viewModelScope)
+        }
+    }
 
     /**
      * Tv

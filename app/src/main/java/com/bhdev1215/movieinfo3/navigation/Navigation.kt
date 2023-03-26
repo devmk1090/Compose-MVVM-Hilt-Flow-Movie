@@ -24,15 +24,42 @@ fun Navigation(
         composable(NavigationObject.TV) {
             HomeScreen(navController = navController, currentScreen = NavigationObject.TV)
         }
-        composable(NavigationObject.MORE_MOVIE) {
-            MoreScreen(navController = navController, currentScreen = NavigationObject.HOME)
+
+        composable(
+            NavigationObject.MORE_MOVIE.plus(NavigationObject.More.MORE_MOVIE_TYPE_PATH),
+            arguments = listOf(navArgument(NavigationObject.More.MORE_MOVIE_TYPE) {
+                type = NavType.StringType
+            })
+        ) {
+            val movieType = it.arguments?.getString(NavigationObject.More.MORE_MOVIE_TYPE)
+            if (movieType != null) {
+                MoreScreen(
+                    navController = navController,
+                    currentScreen = NavigationObject.HOME,
+                    type = movieType
+                )
+            }
         }
-        composable(NavigationObject.MORE_TV) {
-            MoreScreen(navController = navController, currentScreen = NavigationObject.TV)
+        composable(
+            NavigationObject.MORE_TV.plus(NavigationObject.More.MORE_TV_TYPE_PATH),
+            arguments = listOf(navArgument(NavigationObject.More.MORE_TV_TYPE) {
+                type = NavType.StringType
+            })
+        ) {
+            val movieType = it.arguments?.getString(NavigationObject.More.MORE_TV_TYPE)
+            if (movieType != null) {
+                MoreScreen(
+                    navController = navController,
+                    currentScreen = NavigationObject.TV,
+                    type = movieType
+                )
+            }
         }
+
         composable(NavigationObject.SEARCH) {
             SearchScreen(navController = navController)
         }
+
         composable(
             NavigationObject.Detail.MOVIE_DETAIL.plus(NavigationObject.Detail.MOVIE_DETAIL_PATH),
             arguments = listOf(navArgument(NavigationObject.Detail.MOVIE_ITEM) {

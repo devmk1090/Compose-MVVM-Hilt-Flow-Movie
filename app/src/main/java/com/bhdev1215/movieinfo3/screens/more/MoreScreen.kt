@@ -1,5 +1,6 @@
 package com.bhdev1215.movieinfo3.screens.more
 
+import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,7 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.bhdev1215.movieinfo3.model.Movie
+import com.bhdev1215.movieinfo3.model.TvSeries
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
@@ -29,10 +33,22 @@ fun MoreScreen(
     viewModel: HomeViewModel = hiltViewModel(),
     navController: NavController,
     currentScreen: String,
+    type: String,
     ) {
 
-    val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
-    val trendingTvList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
+    var movieTypeList: LazyPagingItems<Movie>? = null
+    var tvTypeList: LazyPagingItems<TvSeries>? = null
+
+    if (currentScreen == NavigationObject.HOME) {
+        when (type) {
+            "Trending" -> movieTypeList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
+            "NowPlaying" -> movieTypeList = viewModel.nowPlayingMovieList.value.collectAsLazyPagingItems()
+        }
+    } else {
+        when (type) {
+            "Trending" -> tvTypeList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
+        }
+    }
 
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
@@ -40,7 +56,7 @@ fun MoreScreen(
     Column {
         CommonAppBar(
             title = {
-                    Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
+                Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
             },
             modifier = Modifier.fillMaxWidth(),
             showBackArrow = true,
@@ -50,14 +66,14 @@ fun MoreScreen(
         )
         if (currentScreen == NavigationObject.HOME) {
             LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
-                items(trendingMovieList.itemCount) { it ->
+                items(movieTypeList!!.itemCount) { it ->
                     MovieItem(
                         modifier = Modifier
                             .height(285.dp)
                             .clickable {
-                                navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${trendingMovieList[it]?.id}"))
+                                navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${movieTypeList[it]?.id}"))
                             },
-                        imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingMovieList[it]?.posterPath}",
+                        imageUrl = "${Constants.IMAGE_BASE_URL}/${movieTypeList[it]?.posterPath}",
                         title = null,
                         release = null,
                         rating = null
@@ -66,14 +82,14 @@ fun MoreScreen(
             })
         } else {
             LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
-                items(trendingTvList.itemCount) { it ->
+                items(tvTypeList!!.itemCount) { it ->
                     MovieItem(
                         modifier = Modifier
                             .height(285.dp)
                             .clickable {
-                                navController.navigate(NavigationObject.Detail.TV_DETAIL.plus("/${trendingTvList[it]?.id}"))
+                                navController.navigate(NavigationObject.Detail.TV_DETAIL.plus("/${tvTypeList[it]?.id}"))
                             },
-                        imageUrl = "${Constants.IMAGE_BASE_URL}/${trendingTvList[it]?.posterPath}",
+                        imageUrl = "${Constants.IMAGE_BASE_URL}/${tvTypeList[it]?.posterPath}",
                         title = null,
                         release = null,
                         rating = null
