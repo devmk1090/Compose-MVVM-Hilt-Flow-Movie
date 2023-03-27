@@ -36,17 +36,32 @@ fun MoreScreen(
     type: String,
     ) {
 
+    var title = ""
     var movieTypeList: LazyPagingItems<Movie>? = null
     var tvTypeList: LazyPagingItems<TvSeries>? = null
 
     if (currentScreen == NavigationObject.HOME) {
         when (type) {
-            "Trending" -> movieTypeList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
-            "NowPlaying" -> movieTypeList = viewModel.nowPlayingMovieList.value.collectAsLazyPagingItems()
+            "Trending" -> {
+                title = "금주의 트렌드"
+                movieTypeList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
+            }
+            "NowPlaying" -> {
+                title = "현재 상영작"
+                movieTypeList = viewModel.nowPlayingMovieList.value.collectAsLazyPagingItems()
+            }
         }
     } else {
         when (type) {
-            "Trending" -> tvTypeList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
+            "Trending" -> {
+                title = "금주의 트렌드"
+                tvTypeList = viewModel.trendingTvList.value.collectAsLazyPagingItems()
+            }
+            "OnAir" -> {
+                title = "방영중"
+                tvTypeList = viewModel.onAirTvList.value.collectAsLazyPagingItems()
+            }
+
         }
     }
 
@@ -56,7 +71,7 @@ fun MoreScreen(
     Column {
         CommonAppBar(
             title = {
-                Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
+                Text(text = title, color = Color.White, fontSize = 18.sp)
             },
             modifier = Modifier.fillMaxWidth(),
             showBackArrow = true,

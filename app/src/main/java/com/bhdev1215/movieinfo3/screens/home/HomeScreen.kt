@@ -39,7 +39,8 @@ fun HomeScreen(
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
     val nowPlayingMovieList = viewModel.nowPlayingMovieList.value.collectAsLazyPagingItems()
 
-    val trendingTvList = viewModel.trendingTvSeries.value.collectAsLazyPagingItems()
+    val trendingTvList = viewModel.trendingTvList.value.collectAsLazyPagingItems()
+    val onAirTvList = viewModel.onAirTvList.value.collectAsLazyPagingItems()
 
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
@@ -84,54 +85,110 @@ fun HomeScreen(
             }
         ) {
             if (currentScreen == NavigationObject.TV) {
-                LazyColumn {
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = 4.dp, end = 4.dp),
-                            horizontalArrangement = Arrangement.SpaceBetween
-                        ) {
-                            Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
-                            ClickableText(
-                                text = AnnotatedString("더보기"),
-                                style = TextStyle(
-                                    color = Color.White,
-                                    fontSize = 18.sp
-                                ),
-                                onClick = {
-                                    navController.navigate(NavigationObject.MORE_TV.plus(
-                                        "/Trending"
-                                    ))
-                                })
+                Column {
+                    LazyColumn {
+                        item {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 4.dp, end = 4.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(text = "금주의 트렌드", color = Color.White, fontSize = 18.sp)
+                                ClickableText(
+                                    text = AnnotatedString("더보기"),
+                                    style = TextStyle(
+                                        color = Color.White,
+                                        fontSize = 18.sp
+                                    ),
+                                    onClick = {
+                                        navController.navigate(NavigationObject.MORE_TV.plus(
+                                            "/Trending"
+                                        ))
+                                    })
+                            }
+                            Spacer(modifier = Modifier.height(6.dp))
                         }
-                        Spacer(modifier = Modifier.height(6.dp))
-                    }
-                    item {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .height(215.dp)
-                        ) {
-                            LazyRow(content = {
-                                items(trendingTvList) { it ->
-                                    MovieItem(
-                                        modifier = Modifier
-                                            .width(150.dp)
-                                            .clickable {
-                                                navController.navigate(
-                                                    NavigationObject.Detail.TV_DETAIL.plus(
-                                                        "/${it?.id}"
+                        item {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(215.dp)
+                            ) {
+                                LazyRow(content = {
+                                    items(trendingTvList) { it ->
+                                        MovieItem(
+                                            modifier = Modifier
+                                                .width(150.dp)
+                                                .clickable {
+                                                    navController.navigate(
+                                                        NavigationObject.Detail.TV_DETAIL.plus(
+                                                            "/${it?.id}"
+                                                        )
                                                     )
-                                                )
-                                            },
-                                        imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
-                                        title = null,
-                                        release = null,
-                                        rating = null
-                                    )
-                                }
-                            })
+                                                },
+                                            imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                            title = null,
+                                            release = null,
+                                            rating = null
+                                        )
+                                    }
+                                })
+                            }
+                        }
+                    }
+
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    LazyColumn {
+                        item {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(start = 4.dp, end = 4.dp),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Text(text = "방영중", color = Color.White, fontSize = 18.sp)
+                                ClickableText(
+                                    text = AnnotatedString("더보기"),
+                                    style = TextStyle(
+                                        color = Color.White,
+                                        fontSize = 18.sp
+                                    ),
+                                    onClick = {
+                                        navController.navigate(NavigationObject.MORE_TV.plus(
+                                            "/Trending"
+                                        ))
+                                    })
+                            }
+                            Spacer(modifier = Modifier.height(6.dp))
+                        }
+                        item {
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .height(215.dp)
+                            ) {
+                                LazyRow(content = {
+                                    items(onAirTvList) { it ->
+                                        MovieItem(
+                                            modifier = Modifier
+                                                .width(150.dp)
+                                                .clickable {
+                                                    navController.navigate(
+                                                        NavigationObject.Detail.TV_DETAIL.plus(
+                                                            "/${it?.id}"
+                                                        )
+                                                    )
+                                                },
+                                            imageUrl = "$IMAGE_BASE_URL/${it?.posterPath}",
+                                            title = null,
+                                            release = null,
+                                            rating = null
+                                        )
+                                    }
+                                })
+                            }
                         }
                     }
                 }

@@ -27,13 +27,17 @@ class HomeViewModel @Inject constructor(
     private var _nowPlayingMovieList = mutableStateOf<Flow<PagingData<Movie>>>(emptyFlow())
     val nowPlayingMovieList: State<Flow<PagingData<Movie>>> = _nowPlayingMovieList
 
-    private val _trendingTvSeries = mutableStateOf<Flow<PagingData<TvSeries>>>(emptyFlow())
-    val trendingTvSeries: State<Flow<PagingData<TvSeries>>> = _trendingTvSeries
+    private val _trendingTvList = mutableStateOf<Flow<PagingData<TvSeries>>>(emptyFlow())
+    val trendingTvList: State<Flow<PagingData<TvSeries>>> = _trendingTvList
+
+    private val _onAirTvList = mutableStateOf<Flow<PagingData<TvSeries>>>(emptyFlow())
+    val onAirTvList: State<Flow<PagingData<TvSeries>>> = _onAirTvList
 
     init {
         getTrendingMovies()
         getNowPlyingMovies()
         getTrendingTv()
+        getOnAirTv()
     }
 
     /**
@@ -58,7 +62,13 @@ class HomeViewModel @Inject constructor(
 
     private fun getTrendingTv() {
         viewModelScope.launch {
-            _trendingTvSeries.value = tvRepository.getTrendingWeekTv().cachedIn(viewModelScope)
+            _trendingTvList.value = tvRepository.getTrendingWeekTv().cachedIn(viewModelScope)
+        }
+    }
+
+    private fun getOnAirTv() {
+        viewModelScope.launch {
+            _onAirTvList.value = tvRepository.getOnAirTv().cachedIn(viewModelScope)
         }
     }
 }

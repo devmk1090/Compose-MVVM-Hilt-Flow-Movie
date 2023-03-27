@@ -3,6 +3,7 @@ package com.bhdev1215.movieinfo3.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.bhdev1215.movieinfo3.data.paging.OnAirTvSource
 import com.bhdev1215.movieinfo3.data.paging.TrendingTvSource
 import com.bhdev1215.movieinfo3.data.remote.TMDBApi
 import com.bhdev1215.movieinfo3.model.TvSeries
@@ -16,6 +17,15 @@ class TvRepository @Inject constructor(private val api: TMDBApi) {
             config = PagingConfig(enablePlaceholders = false, pageSize = 20),
             pagingSourceFactory = {
                 TrendingTvSource(api)
+            }
+        ).flow
+    }
+
+    fun getOnAirTv(): Flow<PagingData<TvSeries>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = 20),
+            pagingSourceFactory = {
+                OnAirTvSource(api)
             }
         ).flow
     }
