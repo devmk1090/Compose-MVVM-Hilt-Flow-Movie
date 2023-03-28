@@ -86,7 +86,7 @@ interface TMDBApi {
     suspend fun getOnAirTv(
         @Query("page") page: Int = PAGING_INDEX,
         @Query("api_key") apiKey: String = API_KEY,
-        @Query("language") language: String = "en"
+        @Query("language") language: String = "ko"
     ): TvResponse
 
     @GET("tv/{tv_id}")

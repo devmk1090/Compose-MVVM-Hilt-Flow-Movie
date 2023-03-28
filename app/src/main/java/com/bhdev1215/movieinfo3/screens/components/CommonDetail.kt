@@ -29,9 +29,9 @@ import com.bhdev1215.movieinfo3.util.Resource
 fun CommonDetail(
     navController: NavController,
     item: Resource<MovieDetailResponse>,
-    videoList: ArrayList<VideoItems>,
-    creditList: ArrayList<Cast>,
-    crewList: ArrayList<Crew>
+    videoList: ArrayList<VideoItems>? = null,
+    creditList: ArrayList<Cast>? = null,
+    crewList: ArrayList<Crew>? = null
 ) {
     val data = item.data
     Column(

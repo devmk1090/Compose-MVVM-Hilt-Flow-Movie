@@ -41,7 +41,7 @@ fun MovieDetailScreen(
     val scaffoldState = rememberScaffoldState()
 
     Box {
-        if (detail is Resource.Success && videos is Resource.Success && credits is Resource.Success) {
+        if (detail is Resource.Success) {
             Column {
                 CommonAppBar(
                     title = {
@@ -53,9 +53,13 @@ fun MovieDetailScreen(
                     coroutineScope = coroutineScope,
                     scaffoldState = scaffoldState
                 )
-
-                //Detail
-                CommonDetail(navController = navController, item = detail, videoList = videos.data!!.results, creditList = credits.data!!.cast, crewList = credits.data.crew)
+                CommonDetail(
+                    navController = navController,
+                    item = detail,
+                    videoList = videos.data?.results,
+                    creditList = credits.data?.cast,
+                    crewList = credits.data?.crew
+                )
             }
         } else {
             CircularProgressIndicator()

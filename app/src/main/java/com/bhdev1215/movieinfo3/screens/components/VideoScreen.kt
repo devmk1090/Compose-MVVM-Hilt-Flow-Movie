@@ -26,41 +26,43 @@ import com.bhdev1215.movieinfo3.util.Constants
 
 @Composable
 fun VideoScreen(
-    item: ArrayList<VideoItems>
+    item: ArrayList<VideoItems>? = null
 ) {
     val context = LocalContext.current
-    Column {
-        LazyRow(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-        ) {
-            items(item, itemContent = { item ->
-                Box(modifier = Modifier
-                    .height(135.dp)
-                    .width(240.dp)
-                    .clickable {
-                        val playVideoIntent = Intent(
-                            Intent.ACTION_VIEW,
-                            Uri.parse(Constants.getYoutubeVideoPath(item.key))
+    if (item != null) {
+        Column {
+            LazyRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                items(item, itemContent = { item ->
+                    Box(modifier = Modifier
+                        .height(135.dp)
+                        .width(240.dp)
+                        .clickable {
+                            val playVideoIntent = Intent(
+                                Intent.ACTION_VIEW,
+                                Uri.parse(Constants.getYoutubeVideoPath(item.key))
+                            )
+                            context.startActivity(playVideoIntent)
+                        }
+                    ) {
+                        Image(
+                            painter = rememberImagePainter(Constants.getYoutubeVideoThumbnail(item.key)),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .align(Alignment.Center)
+                                .cornerRadius10(),
+                            contentScale = ContentScale.FillWidth
                         )
-                        context.startActivity(playVideoIntent)
+                        Image(
+                            painter = painterResource(id = R.drawable.ic_video_play),
+                            contentDescription = null,
+                            modifier = Modifier.align(Alignment.Center)
+                        )
                     }
-                ) {
-                    Image(
-                        painter = rememberImagePainter(Constants.getYoutubeVideoThumbnail(item.key)),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .align(Alignment.Center)
-                            .cornerRadius10(),
-                        contentScale = ContentScale.FillWidth
-                    )
-                    Image(
-                        painter = painterResource(id = R.drawable.ic_video_play),
-                        contentDescription = null,
-                        modifier = Modifier.align(Alignment.Center)
-                    )
-                }
-            })
+                })
+            }
         }
     }
 }

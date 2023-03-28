@@ -1,6 +1,5 @@
 package com.bhdev1215.movieinfo3.screens.more
 
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
