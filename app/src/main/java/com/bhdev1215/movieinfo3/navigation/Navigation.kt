@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.bhdev1215.movieinfo3.screens.components.CastDetailScreen
+import com.bhdev1215.movieinfo3.screens.people.CastDetailScreen
 import com.bhdev1215.movieinfo3.screens.detail.MovieDetailScreen
 import com.bhdev1215.movieinfo3.screens.detail.TvDetailScreen
 import com.bhdev1215.movieinfo3.screens.home.HomeScreen

@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.screens.components
+package com.bhdev1215.movieinfo3.screens.people
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

@@ -15,15 +15,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.paging.compose.LazyPagingItems
-import com.bhdev1215.movieinfo3.model.TvSeries
+import com.bhdev1215.movieinfo3.model.Movie
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.util.Constants
 
 @Composable
-fun HomeScreenType(
+fun HomeScreenMovieType(
     navController: NavController,
-    pagingItems: LazyPagingItems<TvSeries>,
+    pagingItems: LazyPagingItems<Movie>,
     title: String,
     type: String,
 ) {
@@ -44,7 +44,7 @@ fun HomeScreenType(
                     ),
                     onClick = {
                         navController.navigate(
-                            NavigationObject.MORE_TV.plus(
+                            NavigationObject.MORE_MOVIE.plus(
                                 "/$type"
                             ))
                     })
@@ -64,7 +64,7 @@ fun HomeScreenType(
                                 .width(150.dp)
                                 .clickable {
                                     navController.navigate(
-                                        NavigationObject.Detail.TV_DETAIL.plus(
+                                        NavigationObject.Detail.MOVIE_DETAIL.plus(
                                             "/${pagingItems[it]?.id}"
                                         )
                                     )
