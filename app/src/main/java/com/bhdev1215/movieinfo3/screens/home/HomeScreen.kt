@@ -1,11 +1,13 @@
 package com.bhdev1215.movieinfo3.screens.home
 
+import android.app.Activity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -94,19 +96,23 @@ fun HomeScreen(
         }
     }
 
+    val activity = (LocalContext.current as? Activity)
+
     if (showAlertDialog) {
         OnBackDialog(
             onDismissRequest = { showAlertDialog = false },
             onConfirmClick = {
+                activity?.finish()
                 //TODO finish() or navigateUp()
             }
         )
     }
 
-    BackHandler {
+    BackHandler(true) {
         coroutineScope.launch {
-            scaffoldState.drawerState.close()
             if (scaffoldState.drawerState.isOpen) {
+                scaffoldState.drawerState.close()
+            } else {
                 showAlertDialog = true
             }
         }
