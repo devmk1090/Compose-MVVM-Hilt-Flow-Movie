@@ -28,8 +28,8 @@ fun NavigationDrawer(
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(26, 154, 255, 255),
-                        Color(154, 210, 255, 255)
+                        Color(30, 30, 30, 255),
+                        Color(0, 50, 90, 255)
                     )
                 )
             ),
