@@ -22,6 +22,13 @@ interface TMDBApi {
         @Query("language") language: String = "ko"
     ): MovieResponse
 
+    @GET("movie/now_playing")
+    suspend fun getNowPlayingMovie(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): MovieResponse
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,
@@ -70,6 +77,13 @@ interface TMDBApi {
 
     @GET("trending/tv/week")
     suspend fun getTrendingWeekTv(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvResponse
+
+    @GET("tv/on_the_air")
+    suspend fun getOnAirTv(
         @Query("page") page: Int = PAGING_INDEX,
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"

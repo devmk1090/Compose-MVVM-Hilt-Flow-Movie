@@ -3,6 +3,7 @@ package com.bhdev1215.movieinfo3.data.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.bhdev1215.movieinfo3.data.paging.NowPlayingMovieSource
 import com.bhdev1215.movieinfo3.data.paging.TrendingMovieSource
 import com.bhdev1215.movieinfo3.data.remote.TMDBApi
 import com.bhdev1215.movieinfo3.model.Movie
@@ -16,6 +17,15 @@ class MovieRepository @Inject constructor(private val api: TMDBApi) {
             config = PagingConfig(enablePlaceholders = false, pageSize = 20),
             pagingSourceFactory = {
                 TrendingMovieSource(api)
+            }
+        ).flow
+    }
+
+    fun getNowPlayingMovies(): Flow<PagingData<Movie>> {
+        return Pager(
+            config = PagingConfig(enablePlaceholders = false, pageSize = 20),
+            pagingSourceFactory = {
+                NowPlayingMovieSource(api)
             }
         ).flow
     }

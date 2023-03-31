@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.screens.components
+package com.bhdev1215.movieinfo3.screens.people
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -22,6 +22,8 @@ import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.artist.CastDetail
 import com.bhdev1215.movieinfo3.model.artist.CastFilmography
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
+import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
+import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.screens.detail.DetailViewModel
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants

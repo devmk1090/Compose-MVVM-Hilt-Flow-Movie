@@ -7,6 +7,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
@@ -39,7 +40,7 @@ fun TvDetailScreen(
     val scaffoldState = rememberScaffoldState()
 
     Box {
-        if (detail is Resource.Success && videos is Resource.Success && credits is Resource.Success) {
+        if (detail is Resource.Success) {
             Column {
                 CommonAppBar(
                     title = {
@@ -54,13 +55,27 @@ fun TvDetailScreen(
                 CommonTvDetail(
                     navController = navController,
                     item = detail,
-                    videoList = videos.data!!.results,
-                    creditList = credits.data!!.cast,
-                    crewList = credits.data.crew
+                    videoList = videos.data?.results,
+                    creditList = credits.data?.cast,
+                    crewList = credits.data?.crew
                 )
             }
         } else {
-            CircularProgressIndicator()
+            Column {
+                CommonAppBar(
+                    title = {
+                        Text(text = "", color = Color.White, fontSize = 18.sp)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    showBackArrow = true,
+                    navController = navController,
+                    coroutineScope = coroutineScope,
+                    scaffoldState = scaffoldState
+                )
+                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "정보가 없습니다", color = Color.White, fontSize = 24.sp)
+                }
+            }
         }
     }
 }

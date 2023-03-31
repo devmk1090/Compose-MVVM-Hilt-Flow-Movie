@@ -6,7 +6,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.bhdev1215.movieinfo3.screens.components.CastDetailScreen
+import com.bhdev1215.movieinfo3.screens.people.CastDetailScreen
 import com.bhdev1215.movieinfo3.screens.detail.MovieDetailScreen
 import com.bhdev1215.movieinfo3.screens.detail.TvDetailScreen
 import com.bhdev1215.movieinfo3.screens.home.HomeScreen
@@ -24,15 +24,42 @@ fun Navigation(
         composable(NavigationObject.TV) {
             HomeScreen(navController = navController, currentScreen = NavigationObject.TV)
         }
-        composable(NavigationObject.MORE_MOVIE) {
-            MoreScreen(navController = navController, currentScreen = NavigationObject.HOME)
+
+        composable(
+            NavigationObject.MORE_MOVIE.plus(NavigationObject.More.MORE_MOVIE_TYPE_PATH),
+            arguments = listOf(navArgument(NavigationObject.More.MORE_MOVIE_TYPE) {
+                type = NavType.StringType
+            })
+        ) {
+            val movieType = it.arguments?.getString(NavigationObject.More.MORE_MOVIE_TYPE)
+            if (movieType != null) {
+                MoreScreen(
+                    navController = navController,
+                    currentScreen = NavigationObject.HOME,
+                    type = movieType
+                )
+            }
         }
-        composable(NavigationObject.MORE_TV) {
-            MoreScreen(navController = navController, currentScreen = NavigationObject.TV)
+        composable(
+            NavigationObject.MORE_TV.plus(NavigationObject.More.MORE_TV_TYPE_PATH),
+            arguments = listOf(navArgument(NavigationObject.More.MORE_TV_TYPE) {
+                type = NavType.StringType
+            })
+        ) {
+            val movieType = it.arguments?.getString(NavigationObject.More.MORE_TV_TYPE)
+            if (movieType != null) {
+                MoreScreen(
+                    navController = navController,
+                    currentScreen = NavigationObject.TV,
+                    type = movieType
+                )
+            }
         }
+
         composable(NavigationObject.SEARCH) {
             SearchScreen(navController = navController)
         }
+
         composable(
             NavigationObject.Detail.MOVIE_DETAIL.plus(NavigationObject.Detail.MOVIE_DETAIL_PATH),
             arguments = listOf(navArgument(NavigationObject.Detail.MOVIE_ITEM) {

@@ -1,14 +1,12 @@
 package com.bhdev1215.movieinfo3.screens.detail
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.produceState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
@@ -41,11 +39,11 @@ fun MovieDetailScreen(
     val scaffoldState = rememberScaffoldState()
 
     Box {
-        if (detail is Resource.Success && videos is Resource.Success && credits is Resource.Success) {
+        if (detail is Resource.Success) {
             Column {
                 CommonAppBar(
                     title = {
-                        Text(text = detail.data?.title.toString(), color = Color.White, fontSize = 18.sp)
+                        Text(text = detail.data?.title!!, color = Color.White, fontSize = 18.sp)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = true,
@@ -53,12 +51,30 @@ fun MovieDetailScreen(
                     coroutineScope = coroutineScope,
                     scaffoldState = scaffoldState
                 )
-
-                //Detail
-                CommonDetail(navController = navController, item = detail, videoList = videos.data!!.results, creditList = credits.data!!.cast, crewList = credits.data.crew)
+                CommonDetail(
+                    navController = navController,
+                    item = detail,
+                    videoList = videos.data?.results,
+                    creditList = credits.data?.cast,
+                    crewList = credits.data?.crew
+                )
             }
         } else {
-            CircularProgressIndicator()
+            Column {
+                CommonAppBar(
+                    title = {
+                        Text(text = "", color = Color.White, fontSize = 18.sp)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    showBackArrow = true,
+                    navController = navController,
+                    coroutineScope = coroutineScope,
+                    scaffoldState = scaffoldState
+                )
+                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "정보가 없습니다", color = Color.White, fontSize = 24.sp)
+                }
+            }
         }
     }
 }

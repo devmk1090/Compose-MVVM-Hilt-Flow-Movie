@@ -16,11 +16,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
-import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.data.remote.response.MovieDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
+import com.bhdev1215.movieinfo3.screens.people.CreditScreen
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
@@ -29,9 +29,9 @@ import com.bhdev1215.movieinfo3.util.Resource
 fun CommonDetail(
     navController: NavController,
     item: Resource<MovieDetailResponse>,
-    videoList: ArrayList<VideoItems>,
-    creditList: ArrayList<Cast>,
-    crewList: ArrayList<Crew>
+    videoList: ArrayList<VideoItems>? = null,
+    creditList: ArrayList<Cast>? = null,
+    crewList: ArrayList<Crew>? = null
 ) {
     val data = item.data
     Column(

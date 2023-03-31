@@ -20,9 +20,8 @@ import com.bhdev1215.movieinfo3.data.remote.response.TvDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
-import com.bhdev1215.movieinfo3.ui.theme.Typography
+import com.bhdev1215.movieinfo3.screens.people.CreditScreen
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
-import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
@@ -30,9 +29,9 @@ import com.bhdev1215.movieinfo3.util.Resource
 fun CommonTvDetail(
     navController: NavController,
     item: Resource<TvDetailResponse>,
-    videoList: ArrayList<VideoItems>,
-    creditList: ArrayList<Cast>,
-    crewList: ArrayList<Crew>
+    videoList: ArrayList<VideoItems>? = null,
+    creditList: ArrayList<Cast>? = null,
+    crewList: ArrayList<Crew>? = null
 ) {
     val data = item.data
     Column(
@@ -109,10 +108,24 @@ fun CommonTvDetail(
                         )
                     }
                 }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "시즌정보",
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
                 Text(
                     modifier = Modifier
-                        .padding(start = 4.dp),
-                    text = ", ${data.numberOfSeasons}시즌",
+                        .padding(start = 8.dp),
+                    text = "${data.numberOfSeasons}시즌",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.ExtraLight,
                     color = Color.White
@@ -120,7 +133,7 @@ fun CommonTvDetail(
                 Text(
                     modifier = Modifier
                         .padding(start = 4.dp),
-                    text = ", ${data.numberOfEpisodes}부작",
+                    text = "${data.numberOfEpisodes}부작",
                     fontSize = 14.sp,
                     fontWeight = FontWeight.ExtraLight,
                     color = Color.White
