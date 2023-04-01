@@ -30,9 +30,13 @@ fun HomeScreen(
 
     val trendingMovieList = viewModel.trendingMovieList.value.collectAsLazyPagingItems()
     val nowPlayingMovieList = viewModel.nowPlayingMovieList.value.collectAsLazyPagingItems()
+    val popularMovieList = viewModel.popularMovieList.value.collectAsLazyPagingItems()
+    val topRatedMovieList = viewModel.topRatedMovieList.value.collectAsLazyPagingItems()
 
     val trendingTvList = viewModel.trendingTvList.value.collectAsLazyPagingItems()
     val onAirTvList = viewModel.onAirTvList.value.collectAsLazyPagingItems()
+    val popularTvList = viewModel.popularTvList.value.collectAsLazyPagingItems()
+    val topRatedTvList = viewModel.topRatedTvList.value.collectAsLazyPagingItems()
 
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
@@ -79,18 +83,27 @@ fun HomeScreen(
             if (currentScreen == NavigationObject.TV) {
                 Column {
                     HomeScreenTvType(navController = navController, pagingItems = trendingTvList, title = "금주의 트렌드", type = "Trending")
-
                     Spacer(modifier = Modifier.height(10.dp))
 
                     HomeScreenTvType(navController = navController, pagingItems = onAirTvList, title = "방영중", type = "OnAir")
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    HomeScreenTvType(navController = navController, pagingItems = popularTvList, title = "인기 시리즈", type = "Popular")
+                    Spacer(modifier = Modifier.height(10.dp))
+
+                    HomeScreenTvType(navController = navController, pagingItems = topRatedTvList, title = "평점 높은순", type = "TopRated")
                 }
             } else {
                 Column {
                     HomeScreenMovieType(navController = navController, pagingItems = trendingMovieList, title = "금주의 트렌드", type = "Trending")
-
                     Spacer(modifier = Modifier.height(12.dp))
 
                     HomeScreenMovieType(navController = navController, pagingItems = nowPlayingMovieList, title = "현재 상영작", type = "NowPlaying")
+
+                    HomeScreenMovieType(navController = navController, pagingItems = popularMovieList, title = "인기 영화", type = "Popular")
+                    Spacer(modifier = Modifier.height(12.dp))
+
+                    HomeScreenMovieType(navController = navController, pagingItems = topRatedMovieList, title = "평점 높은순", type = "TopRated")
                 }
             }
         }

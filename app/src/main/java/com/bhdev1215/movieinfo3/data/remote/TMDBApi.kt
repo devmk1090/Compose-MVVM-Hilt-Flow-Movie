@@ -29,6 +29,20 @@ interface TMDBApi {
         @Query("language") language: String = "ko"
     ): MovieResponse
 
+    @GET("movie/popular")
+    suspend fun getPopularMovie(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): MovieResponse
+
+    @GET("movie/top_rated")
+    suspend fun getTopRatedMovie(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): MovieResponse
+
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: Int,
@@ -88,6 +102,21 @@ interface TMDBApi {
         @Query("api_key") apiKey: String = API_KEY,
         @Query("language") language: String = "ko"
     ): TvResponse
+
+    @GET("tv/popular")
+    suspend fun getPopularTv(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvResponse
+
+    @GET("tv/top_rated")
+    suspend fun getTopRatedTv(
+        @Query("page") page: Int = PAGING_INDEX,
+        @Query("api_key") apiKey: String = API_KEY,
+        @Query("language") language: String = "ko"
+    ): TvResponse
+
 
     @GET("tv/{tv_id}")
     suspend fun getTvDetail(
