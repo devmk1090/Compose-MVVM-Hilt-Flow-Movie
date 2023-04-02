@@ -27,7 +27,7 @@ fun DrawerHeader() {
     )
 
     Text(
-        text = "안드로이드 개발",
+        text = "영화 & 티비 시리즈",
         color = Color.White,
         fontSize = 24.sp,
         fontWeight = FontWeight.Bold,

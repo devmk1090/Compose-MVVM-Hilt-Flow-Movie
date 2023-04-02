@@ -49,6 +49,18 @@ fun MoreScreen(
                 title = "현재 상영작"
                 movieTypeList = viewModel.nowPlayingMovieList.value.collectAsLazyPagingItems()
             }
+            "Popular" -> {
+                title = "인기 영화"
+                movieTypeList = viewModel.popularMovieList.value.collectAsLazyPagingItems()
+            }
+            "TopRated" -> {
+                title = "평점 높은순"
+                movieTypeList = viewModel.topRatedMovieList.value.collectAsLazyPagingItems()
+            }
+            "Upcoming" -> {
+                title = "개봉 예정작"
+                movieTypeList = viewModel.upcomingMovieList.value.collectAsLazyPagingItems()
+            }
         }
     } else {
         when (type) {
@@ -60,7 +72,14 @@ fun MoreScreen(
                 title = "방영중"
                 tvTypeList = viewModel.onAirTvList.value.collectAsLazyPagingItems()
             }
-
+            "Popular" -> {
+                title = "인기 시리즈"
+                tvTypeList = viewModel.popularTvList.value.collectAsLazyPagingItems()
+            }
+            "TopRated" -> {
+                title = "평점 높은순"
+                tvTypeList = viewModel.topRatedTvList.value.collectAsLazyPagingItems()
+            }
         }
     }
 
