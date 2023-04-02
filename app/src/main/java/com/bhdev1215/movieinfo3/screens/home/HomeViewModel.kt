@@ -34,6 +34,10 @@ class HomeViewModel @Inject constructor(
     private var _topRatedMovieList = mutableStateOf<Flow<PagingData<Movie>>>(emptyFlow())
     val topRatedMovieList: State<Flow<PagingData<Movie>>> = _topRatedMovieList
 
+    private var _upcomingMovieList = mutableStateOf<Flow<PagingData<Movie>>>(emptyFlow())
+    val upcomingMovieList: State<Flow<PagingData<Movie>>> = _upcomingMovieList
+
+
     //TV
     private val _trendingTvList = mutableStateOf<Flow<PagingData<TvSeries>>>(emptyFlow())
     val trendingTvList: State<Flow<PagingData<TvSeries>>> = _trendingTvList
@@ -51,7 +55,8 @@ class HomeViewModel @Inject constructor(
         getTrendingMovies()
         getNowPlyingMovies()
         getPopularMovies()
-        getTopRatedTv()
+        getTopRatedMovies()
+        getUpcomingMovies()
 
         getTrendingTv()
         getOnAirTv()
@@ -86,6 +91,13 @@ class HomeViewModel @Inject constructor(
             _topRatedMovieList.value = moviesRepository.getTopRatedMovies().cachedIn(viewModelScope)
         }
     }
+
+    private fun getUpcomingMovies() {
+        viewModelScope.launch {
+            _upcomingMovieList.value = moviesRepository.getUpcomingMovies().cachedIn(viewModelScope)
+        }
+    }
+
 
     /**
      * Tv

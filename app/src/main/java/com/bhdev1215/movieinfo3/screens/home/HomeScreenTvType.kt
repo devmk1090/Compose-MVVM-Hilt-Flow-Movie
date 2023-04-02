@@ -27,7 +27,7 @@ fun HomeScreenTvType(
     title: String,
     type: String,
 ) {
-    LazyColumn {
+    LazyColumn(modifier = Modifier.height(250.dp)) {
         item {
             Row(
                 modifier = Modifier

@@ -57,6 +57,10 @@ fun MoreScreen(
                 title = "평점 높은순"
                 movieTypeList = viewModel.topRatedMovieList.value.collectAsLazyPagingItems()
             }
+            "Upcoming" -> {
+                title = "개봉 예정작"
+                movieTypeList = viewModel.upcomingMovieList.value.collectAsLazyPagingItems()
+            }
         }
     } else {
         when (type) {
