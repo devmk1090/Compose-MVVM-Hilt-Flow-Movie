@@ -37,6 +37,7 @@ fun CommonDetail(
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
+            .padding(bottom = 48.dp)
     ) {
         Image(
             painter = rememberImagePainter(

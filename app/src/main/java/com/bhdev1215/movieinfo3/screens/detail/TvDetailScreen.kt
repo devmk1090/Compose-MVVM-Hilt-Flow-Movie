@@ -2,6 +2,7 @@ package com.bhdev1215.movieinfo3.screens.detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import androidx.navigation.NavController
 import com.bhdev1215.movieinfo3.data.remote.response.TvDetailResponse
 import com.bhdev1215.movieinfo3.model.artist.Credit
 import com.bhdev1215.movieinfo3.model.video.Videos
+import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.CommonTvDetail
 import com.bhdev1215.movieinfo3.util.Resource
@@ -39,19 +41,23 @@ fun TvDetailScreen(
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
 
-    Box {
-        if (detail is Resource.Success) {
-            Column {
-                CommonAppBar(
-                    title = {
-                        Text(text = detail.data?.name.toString(), color = Color.White, fontSize = 18.sp)
-                    },
-                    modifier = Modifier.fillMaxSize(),
-                    showBackArrow = true,
-                    navController = navController,
-                    coroutineScope = coroutineScope,
-                    scaffoldState = scaffoldState
-                )
+    if (detail is Resource.Success) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Scaffold(
+                topBar = {
+                    CommonAppBar(
+                        title = {
+                            Text(text = detail.data?.name.toString(), color = Color.White, fontSize = 18.sp)
+                        },
+                        modifier = Modifier.fillMaxSize(),
+                        showBackArrow = true,
+                        navController = navController,
+                        coroutineScope = coroutineScope,
+                        scaffoldState = scaffoldState
+                    )
+                },
+                bottomBar = { BannerAdView(isTest = true) }
+            ) {
                 CommonTvDetail(
                     navController = navController,
                     item = detail,
@@ -60,21 +66,21 @@ fun TvDetailScreen(
                     crewList = credits.data?.crew
                 )
             }
-        } else {
-            Column {
-                CommonAppBar(
-                    title = {
-                        Text(text = "", color = Color.White, fontSize = 18.sp)
-                    },
-                    modifier = Modifier.fillMaxWidth(),
-                    showBackArrow = true,
-                    navController = navController,
-                    coroutineScope = coroutineScope,
-                    scaffoldState = scaffoldState
-                )
-                Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "정보가 없습니다", color = Color.White, fontSize = 24.sp)
-                }
+        }
+    } else {
+        Column {
+            CommonAppBar(
+                title = {
+                    Text(text = "", color = Color.White, fontSize = 18.sp)
+                },
+                modifier = Modifier.fillMaxWidth(),
+                showBackArrow = true,
+                navController = navController,
+                coroutineScope = coroutineScope,
+                scaffoldState = scaffoldState
+            )
+            Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(text = "정보가 없습니다", color = Color.White, fontSize = 24.sp)
             }
         }
     }
