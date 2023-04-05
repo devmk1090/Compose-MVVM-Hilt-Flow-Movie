@@ -37,7 +37,7 @@ fun CommonTvDetail(
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(bottom = 48.dp)
+            .padding(bottom = 50.dp)
     ) {
         Image(
             painter = rememberImagePainter(

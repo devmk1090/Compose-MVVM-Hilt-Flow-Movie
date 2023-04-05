@@ -106,7 +106,7 @@ fun HomeScreen(
                     }
                     item {
                         HomeScreenMovieType(navController = navController, pagingItems = upcomingMovieList, title = "개봉 예정작", type = "Upcoming")
-                        Spacer(modifier = Modifier.height(48.dp))
+                        Spacer(modifier = Modifier.height(50.dp))
                     }
                 }
             } else {
@@ -125,7 +125,7 @@ fun HomeScreen(
                     }
                     item {
                         HomeScreenTvType(navController = navController, pagingItems = topRatedTvList, title = "평점 높은순", type = "TopRated")
-                        Spacer(modifier = Modifier.height(48.dp))
+                        Spacer(modifier = Modifier.height(50.dp))
                     }
                 }
             }
@@ -139,7 +139,6 @@ fun HomeScreen(
             onDismissRequest = { showAlertDialog = false },
             onConfirmClick = {
                 activity?.finish()
-                //TODO finish() or navigateUp()
             }
         )
     }

@@ -32,6 +32,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.model.Search
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
+import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
@@ -54,92 +55,108 @@ fun SearchScreen(
     val keyboardController = LocalSoftwareKeyboardController.current
     val searchResult = viewModel.searchResult.value.collectAsLazyPagingItems()
 
-    Column(Modifier.fillMaxSize()) {
-        CommonAppBar(
-            title = {
-                Text(text = "검색", color = Color.White, fontSize = 18.sp)
+    Column(
+        Modifier.fillMaxSize()
+    ) {
+        Scaffold(
+            topBar = {
+                CommonAppBar(
+                    title = {
+                        Text(text = "검색", color = Color.White, fontSize = 18.sp)
+                    },
+                    modifier = Modifier.fillMaxWidth(),
+                    showBackArrow = true,
+                    navController = navController,
+                    coroutineScope = coroutineScope,
+                    scaffoldState = scaffoldState
+                )
             },
-            modifier = Modifier.fillMaxWidth(),
-            showBackArrow = true,
-            navController = navController,
-            coroutineScope = coroutineScope,
-            scaffoldState = scaffoldState
-        )
-
-        SearchTextField(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(64.dp)
-                .padding(4.dp)
-                .cornerRadius10(),
-            viewModel = viewModel,
-            onSearch = {
-                viewModel.getSearchResult(it)
-                keyboardController?.hide()
-            }
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Box(Modifier.fillMaxSize()) {
-            LazyVerticalGrid(cells = GridCells.Fixed(3), content = {
-                items(searchResult.itemCount) { search ->
-                    MovieItem(
-                        modifier = Modifier
-                            .height(185.dp)
-                            .clickable {
-                                navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${searchResult[search]?.id}"))
-                            },
-                        imageUrl = "${Constants.IMAGE_BASE_URL}/${searchResult[search]?.posterPath}",
-                        title = searchResult[search]?.title,
-                        release = searchResult[search]?.releaseDate,
-                        rating = searchResult[search]?.voteAverage.toString()
-                    )
-                }
-            })
-
-            searchResult.apply {
-                when (loadState.refresh) {
-                    is LoadState.Loading -> {
-                        CircularProgressIndicator(
-                            modifier = Modifier.align(Alignment.Center),
-                            color = primaryDark,
-                        )
+            bottomBar = { BannerAdView(isTest = true) }
+        ) {
+            Column {
+                SearchTextField(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(64.dp)
+                        .padding(4.dp)
+                        .cornerRadius10(),
+                    viewModel = viewModel,
+                    onSearch = {
+                        viewModel.getSearchResult(it)
+                        keyboardController?.hide()
                     }
-                    is LoadState.NotLoading -> {
-                        if (searchResult.itemCount == 0) {
-                            Column(
-                                modifier = Modifier.fillMaxSize(),
-                                verticalArrangement = Arrangement.Center,
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Image(
-                                    modifier = Modifier.size(200.dp),
-                                    painter = painterResource(id = R.drawable.ic_baseline_search_off_24),
-                                    contentDescription = null
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Box(Modifier.fillMaxSize()) {
+                    LazyVerticalGrid(
+                        modifier = Modifier.padding(bottom = 50.dp),
+                        cells = GridCells.Fixed(3),
+                        content = {
+                            items(searchResult.itemCount) { search ->
+                                MovieItem(
+                                    modifier = Modifier
+                                        .height(185.dp)
+                                        .clickable {
+                                            navController.navigate(
+                                                NavigationObject.Detail.MOVIE_DETAIL.plus(
+                                                    "/${searchResult[search]?.id}"
+                                                )
+                                            )
+                                        },
+                                    imageUrl = "${Constants.IMAGE_BASE_URL}/${searchResult[search]?.posterPath}",
+                                    title = searchResult[search]?.title,
+                                    release = searchResult[search]?.releaseDate,
+                                    rating = searchResult[search]?.voteAverage.toString()
+                                )
+                            }
+                        })
+
+                    searchResult.apply {
+                        when (loadState.refresh) {
+                            is LoadState.Loading -> {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.align(Alignment.Center),
+                                    color = primaryDark,
+                                )
+                            }
+                            is LoadState.NotLoading -> {
+                                if (searchResult.itemCount == 0) {
+                                    Column(
+                                        modifier = Modifier.fillMaxSize(),
+                                        verticalArrangement = Arrangement.Center,
+                                        horizontalAlignment = Alignment.CenterHorizontally
+                                    ) {
+                                        Image(
+                                            modifier = Modifier.size(200.dp),
+                                            painter = painterResource(id = R.drawable.ic_baseline_search_off_24),
+                                            contentDescription = null
+                                        )
+                                    }
+                                }
+                            }
+                            is LoadState.Error -> {
+                                val e = searchResult.loadState.refresh as LoadState.Error
+                                Text(
+                                    text = when (e.error) {
+                                        is HttpException -> {
+                                            "HttpException !"
+                                        }
+                                        is IOException -> {
+                                            "Server error"
+                                        }
+                                        else -> {
+                                            "다시 시도해주세요"
+                                        }
+                                    },
+                                    modifier = Modifier
+                                        .align(alignment = Alignment.Center),
+                                    textAlign = TextAlign.Center,
+                                    color = Color.White
                                 )
                             }
                         }
-                    }
-                    is LoadState.Error -> {
-                        val e = searchResult.loadState.refresh as LoadState.Error
-                        Text(
-                            text = when (e.error) {
-                                is HttpException -> {
-                                    "HttpException !"
-                                }
-                                is IOException -> {
-                                    "Server error"
-                                }
-                                else -> {
-                                    "다시 시도해주세요"
-                                }
-                            },
-                            modifier = Modifier
-                                .align(alignment = Alignment.Center),
-                            textAlign = TextAlign.Center,
-                            color = Color.White
-                        )
                     }
                 }
             }
