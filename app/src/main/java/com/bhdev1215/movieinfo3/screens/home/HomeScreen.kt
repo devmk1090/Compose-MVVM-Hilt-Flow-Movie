@@ -17,6 +17,7 @@ import androidx.navigation.NavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
+import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.drawer.NavigationDrawer
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
@@ -80,7 +81,8 @@ fun HomeScreen(
                     }
                     navController.navigate(it)
                 }
-            }
+            },
+            bottomBar = { BannerAdView(isTest = true) }
         ) {
             if (currentScreen == NavigationObject.HOME) {
                 LazyColumn {
@@ -104,6 +106,7 @@ fun HomeScreen(
                     }
                     item {
                         HomeScreenMovieType(navController = navController, pagingItems = upcomingMovieList, title = "개봉 예정작", type = "Upcoming")
+                        Spacer(modifier = Modifier.height(50.dp))
                     }
                 }
             } else {
@@ -122,6 +125,7 @@ fun HomeScreen(
                     }
                     item {
                         HomeScreenTvType(navController = navController, pagingItems = topRatedTvList, title = "평점 높은순", type = "TopRated")
+                        Spacer(modifier = Modifier.height(50.dp))
                     }
                 }
             }
@@ -135,7 +139,6 @@ fun HomeScreen(
             onDismissRequest = { showAlertDialog = false },
             onConfirmClick = {
                 activity?.finish()
-                //TODO finish() or navigateUp()
             }
         )
     }
