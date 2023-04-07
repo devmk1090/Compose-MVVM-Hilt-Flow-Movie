@@ -22,6 +22,7 @@ import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
 import com.bhdev1215.movieinfo3.screens.people.CreditScreen
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
@@ -67,6 +68,7 @@ fun CommonTvDetail(
                     text = data.name,
                     color = Color.White,
                     fontSize = 24.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.Bold
                 )
                 VoteAverageIndicator(
@@ -86,6 +88,7 @@ fun CommonTvDetail(
                 Text(
                     text = "방영정보",
                     fontSize = 16.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
                 )
@@ -94,7 +97,8 @@ fun CommonTvDetail(
                         .padding(start = 8.dp),
                     text = data.firstAirDate,
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.ExtraLight,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
                     color = Color.White
                 )
                 LazyRow {
@@ -104,7 +108,8 @@ fun CommonTvDetail(
                                 .padding(start = 4.dp),
                             text = ", ${data.networks[it].name}",
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.ExtraLight,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
                             color = Color.White
                         )
                     }
@@ -120,6 +125,7 @@ fun CommonTvDetail(
                 Text(
                     text = "시즌정보",
                     fontSize = 16.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
                 )
@@ -128,7 +134,8 @@ fun CommonTvDetail(
                         .padding(start = 8.dp),
                     text = "${data.numberOfSeasons}시즌",
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.ExtraLight,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
                     color = Color.White
                 )
                 Text(
@@ -136,7 +143,8 @@ fun CommonTvDetail(
                         .padding(start = 4.dp),
                     text = "${data.numberOfEpisodes}부작",
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.ExtraLight,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
                     color = Color.White
                 )
             }
@@ -149,6 +157,7 @@ fun CommonTvDetail(
                 Text(
                     text = "장르",
                     fontSize = 16.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
                 )
@@ -159,7 +168,8 @@ fun CommonTvDetail(
                                 .padding(start = 8.dp),
                             text = data.genres[it].name,
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.ExtraLight,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
                             color = Color.White
                         )
                     }
@@ -171,7 +181,8 @@ fun CommonTvDetail(
                     .fillMaxWidth(),
                 text = data.overview,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.ExtraLight,
+                fontFamily = quicksand,
+                fontWeight = FontWeight.Normal,
                 color = Color.White
             )
 

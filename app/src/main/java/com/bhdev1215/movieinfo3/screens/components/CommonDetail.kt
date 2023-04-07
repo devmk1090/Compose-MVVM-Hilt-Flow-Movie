@@ -22,6 +22,7 @@ import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.model.video.VideoItems
 import com.bhdev1215.movieinfo3.screens.people.CreditScreen
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
@@ -66,7 +67,8 @@ fun CommonDetail(
                 text = data.title!!,
                 color = Color.White,
                 fontSize = 24.sp,
-                fontWeight = FontWeight.Bold
+                fontFamily = quicksand,
+                fontWeight = FontWeight.Bold,
             )
             Row(
                 verticalAlignment = Alignment.CenterVertically
@@ -76,6 +78,7 @@ fun CommonDetail(
                         .fillMaxWidth(0.13f),
                     text = "개봉일",
                     fontSize = 16.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
                 )
@@ -84,7 +87,8 @@ fun CommonDetail(
                         .fillMaxWidth(0.72f),
                     text = data.releaseDate!!,
                     fontSize = 14.sp,
-                    fontWeight = FontWeight.ExtraLight,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
                     color = Color.White
                 )
                 VoteAverageIndicator(
@@ -100,6 +104,7 @@ fun CommonDetail(
                 Text(
                     text = "장르",
                     fontSize = 16.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.SemiBold,
                     color = Color.White
                 )
@@ -110,7 +115,8 @@ fun CommonDetail(
                                 .padding(start = 4.dp),
                             text = data.genres[it].name,
                             fontSize = 14.sp,
-                            fontWeight = FontWeight.ExtraLight,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
                             color = Color.White
                         )
                     }
@@ -122,7 +128,8 @@ fun CommonDetail(
                     .fillMaxWidth(),
                 text = data.overview!!,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.ExtraLight,
+                fontFamily = quicksand,
+                fontWeight = FontWeight.Normal,
                 color = Color.White
             )
 

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -18,6 +19,7 @@ import androidx.paging.compose.LazyPagingItems
 import com.bhdev1215.movieinfo3.model.TvSeries
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 
 @Composable
@@ -35,12 +37,14 @@ fun HomeScreenTvType(
                     .padding(start = 4.dp, end = 4.dp),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = title, color = Color.White, fontSize = 18.sp)
+                Text(text = title, color = Color.White, fontSize = 18.sp, fontFamily = quicksand, fontWeight = FontWeight.SemiBold)
                 ClickableText(
                     text = AnnotatedString("더보기"),
                     style = TextStyle(
                         color = Color.White,
-                        fontSize = 18.sp
+                        fontSize = 16.sp,
+                        fontFamily = quicksand,
+                        fontWeight = FontWeight.Normal
                     ),
                     onClick = {
                         navController.navigate(

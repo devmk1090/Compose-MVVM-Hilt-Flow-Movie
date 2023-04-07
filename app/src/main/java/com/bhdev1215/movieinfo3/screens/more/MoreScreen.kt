@@ -26,7 +26,6 @@ import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.screens.home.HomeViewModel
 import com.bhdev1215.movieinfo3.util.Constants
-import timber.log.Timber
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -116,9 +115,9 @@ fun MoreScreen(
                                     navController.navigate(NavigationObject.Detail.MOVIE_DETAIL.plus("/${movieTypeList[it]?.id}"))
                                 },
                             imageUrl = "${Constants.IMAGE_BASE_URL}/${movieTypeList[it]?.posterPath}",
-                            title = null,
-                            release = null,
-                            rating = null
+                            title = movieTypeList[it]?.title,
+                            release = movieTypeList[it]?.releaseDate,
+                            rating = movieTypeList[it]?.voteAverage.toString()
                         )
                     }
                 })
@@ -132,9 +131,9 @@ fun MoreScreen(
                                     navController.navigate(NavigationObject.Detail.TV_DETAIL.plus("/${tvTypeList[it]?.id}"))
                                 },
                             imageUrl = "${Constants.IMAGE_BASE_URL}/${tvTypeList[it]?.posterPath}",
-                            title = null,
-                            release = null,
-                            rating = null
+                            title = tvTypeList[it]?.name,
+                            release = tvTypeList[it]?.firstAirDate,
+                            rating = tvTypeList[it]?.voteAverage.toString()
                         )
                     }
                 })

@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhdev1215.movieinfo3.ui.theme.primaryPink
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 
 @Composable
 fun VoteAverageIndicator(
@@ -55,8 +56,9 @@ fun VoteAverageIndicator(
             )
         }
         Text(
-            text = "${(currentPercentage.value * 10).toInt()}",
-            fontSize = 16.sp,
+            text = String.format("%.1f", percentage),
+            fontSize = 18.sp,
+            fontFamily = quicksand,
             fontWeight = FontWeight.Bold,
             color = primaryPink
         )

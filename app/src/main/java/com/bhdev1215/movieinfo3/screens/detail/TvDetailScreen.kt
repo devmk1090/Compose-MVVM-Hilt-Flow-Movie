@@ -1,7 +1,6 @@
 package com.bhdev1215.movieinfo3.screens.detail
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -11,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
@@ -20,6 +20,7 @@ import com.bhdev1215.movieinfo3.model.video.Videos
 import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.CommonTvDetail
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Resource
 
 @Composable
@@ -47,7 +48,7 @@ fun TvDetailScreen(
                 topBar = {
                     CommonAppBar(
                         title = {
-                            Text(text = detail.data?.name.toString(), color = Color.White, fontSize = 18.sp)
+                            Text(text = detail.data?.name.toString(), color = Color.White, fontSize = 18.sp, fontFamily = quicksand, fontWeight = FontWeight.Bold)
                         },
                         modifier = Modifier.fillMaxSize(),
                         showBackArrow = true,
@@ -80,7 +81,7 @@ fun TvDetailScreen(
                 scaffoldState = scaffoldState
             )
             Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(text = "정보가 없습니다", color = Color.White, fontSize = 24.sp)
+                Text(text = "정보가 없습니다", color = Color.White, fontSize = 24.sp, fontFamily = quicksand, fontWeight = FontWeight.Bold)
             }
         }
     }

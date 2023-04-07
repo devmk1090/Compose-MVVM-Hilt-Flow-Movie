@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -21,6 +22,7 @@ import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.drawer.NavigationDrawer
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import kotlinx.coroutines.launch
 
 @Composable
@@ -159,20 +161,20 @@ fun OnBackDialog(onConfirmClick: () -> Unit, onDismissRequest: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismissRequest,
         title = {
-            Text(text = "종료하시겠습니까?", fontSize = 16.sp, color = Color.White)
+            Text(text = "종료하시겠습니까?", fontSize = 18.sp, color = Color.White, fontFamily = quicksand, fontWeight = FontWeight.Bold)
         },
         text = {
-            Text(text = "확인을 누르면 앱이 종료됩니다.", fontSize = 16.sp, color = Color.White)
+            Text(text = "확인을 누르면 앱이 종료됩니다.", fontSize = 16.sp, color = Color.White, fontFamily = quicksand, fontWeight = FontWeight.Normal)
 
         },
         confirmButton = {
             TextButton(onClick = { onConfirmClick() }) {
-                Text(text = "확인", fontSize = 16.sp, color = Color.White)
+                Text(text = "확인", fontSize = 16.sp, color = Color.White, fontFamily = quicksand, fontWeight = FontWeight.Normal)
             }
         },
         dismissButton = {
             TextButton(onClick = { onDismissRequest() }) {
-                Text(text = "취소", fontSize = 16.sp, color = Color.White)
+                Text(text = "취소", fontSize = 16.sp, color = Color.White, fontFamily = quicksand, fontWeight = FontWeight.Normal)
             }
         }
     )

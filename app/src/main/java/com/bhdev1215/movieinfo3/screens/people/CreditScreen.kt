@@ -20,6 +20,7 @@ import com.bhdev1215.movieinfo3.model.artist.Cast
 import com.bhdev1215.movieinfo3.model.artist.Crew
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import timber.log.Timber
 
@@ -35,6 +36,7 @@ fun CreditScreen(
                 text = "출연진",
                 color = Color.White,
                 fontSize = 16.sp,
+                fontFamily = quicksand,
                 fontWeight = FontWeight.SemiBold
             )
             LazyRow(modifier = Modifier.fillMaxHeight()) {
@@ -74,6 +76,8 @@ fun CreditScreen(
                             text = item.name,
                             color = Color.White,
                             fontSize = 14.sp,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
                             modifier = Modifier
                                 .width(80.dp)
                         )
@@ -87,6 +91,7 @@ fun CreditScreen(
                 text = "제작진",
                 color = Color.White,
                 fontSize = 16.sp,
+                fontFamily = quicksand,
                 fontWeight = FontWeight.SemiBold
             )
             LazyRow(modifier = Modifier.fillMaxHeight()) {
@@ -118,6 +123,8 @@ fun CreditScreen(
                             text = item.name,
                             color = Color.White,
                             fontSize = 14.sp,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
                             modifier = Modifier
                                 .width(80.dp)
                         )

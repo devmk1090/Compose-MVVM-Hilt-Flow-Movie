@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhdev1215.movieinfo3.model.NavigationDrawerItem
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 
 @Composable
 fun NavigationMenuItem(
@@ -47,7 +48,8 @@ fun NavigationMenuItem(
             Text(
                 text = item.titleFormat(),
                 fontSize = 18.sp,
-                fontWeight = FontWeight.Medium,
+                fontFamily = quicksand,
+                fontWeight = FontWeight.Normal,
                 color = texColor,
                 modifier = Modifier
                     .padding(start = 16.dp)

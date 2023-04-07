@@ -3,10 +3,7 @@ package com.bhdev1215.movieinfo3.screens.search
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -21,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,7 +28,6 @@ import androidx.navigation.NavController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.bhdev1215.movieinfo3.R
-import com.bhdev1215.movieinfo3.model.Search
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
@@ -38,9 +35,9 @@ import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
 import com.bhdev1215.movieinfo3.ui.theme.primaryDark
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import retrofit2.HttpException
-import timber.log.Timber
 import java.io.IOException
 
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
@@ -62,7 +59,7 @@ fun SearchScreen(
             topBar = {
                 CommonAppBar(
                     title = {
-                        Text(text = "검색", color = Color.White, fontSize = 18.sp)
+                        Text(text = "검색", color = Color.White, fontSize = 18.sp, fontFamily = quicksand, fontWeight = FontWeight.SemiBold)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     showBackArrow = true,
@@ -191,7 +188,7 @@ fun SearchTextField(
                 Icon(imageVector = Icons.Default.Search, tint = primaryGray, contentDescription = null)
             }
         },
-        textStyle = TextStyle(color = Color.White),
+        textStyle = TextStyle(color = Color.White, fontFamily = quicksand, fontWeight = FontWeight.SemiBold),
         maxLines = 1,
         singleLine = true,
         colors = TextFieldDefaults.textFieldColors(

@@ -26,6 +26,7 @@ import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
 import com.bhdev1215.movieinfo3.screens.components.MovieItem
 import com.bhdev1215.movieinfo3.screens.detail.DetailViewModel
 import com.bhdev1215.movieinfo3.ui.theme.cornerRadius10
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import com.bhdev1215.movieinfo3.util.Constants
 import com.bhdev1215.movieinfo3.util.Resource
 
@@ -84,17 +85,17 @@ fun CastDetailScreen(
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Column {
-                            Text(text = data.name, color = Color.White, fontSize = 16.sp)
+                            Text(text = data.name, color = Color.White, fontSize = 16.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal)
                             Spacer(modifier = Modifier.height(10.dp))
 
-                            data.birthday?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
-                            data.deathday?.let { Text(text = "-\n$it", color = Color.White, fontSize = 16.sp) }
+                            data.birthday?.let { Text(text = it, color = Color.White, fontSize = 16.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal) }
+                            data.deathday?.let { Text(text = "-\n$it", color = Color.White, fontSize = 16.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal) }
                             Spacer(modifier = Modifier.height(10.dp))
 
-                            data.knownForDepartment?.let { Text(text = it, color = Color.White, fontSize = 16.sp) }
+                            data.knownForDepartment?.let { Text(text = it, color = Color.White, fontSize = 16.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal) }
                             Spacer(modifier = Modifier.height(10.dp))
 
-                            data.placeOfBirth?.let { Text(text = it, color = Color.White, fontSize = 16.sp)}
+                            data.placeOfBirth?.let { Text(text = it, color = Color.White, fontSize = 16.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal)}
                         }
                     }
                 }
@@ -105,6 +106,7 @@ fun CastDetailScreen(
                     text = "필모그래피",
                     color = Color.White,
                     fontSize = 16.sp,
+                    fontFamily = quicksand,
                     fontWeight = FontWeight.SemiBold
                 )
 

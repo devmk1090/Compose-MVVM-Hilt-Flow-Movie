@@ -14,6 +14,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.bhdev1215.movieinfo3.R
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 
 @Composable
 fun DrawerHeader() {
@@ -30,6 +31,7 @@ fun DrawerHeader() {
         text = "영화 & 티비 시리즈",
         color = Color.White,
         fontSize = 24.sp,
+        fontFamily = quicksand,
         fontWeight = FontWeight.Bold,
         modifier = Modifier
             .padding(start = 16.dp, bottom = 16.dp)

@@ -10,10 +10,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.bhdev1215.movieinfo3.R
+import com.bhdev1215.movieinfo3.ui.theme.quicksand
 
 @Composable
 fun MovieItem(modifier: Modifier, imageUrl: String, title: String?, release: String?, rating: String?) {
@@ -31,8 +32,8 @@ fun MovieItem(modifier: Modifier, imageUrl: String, title: String?, release: Str
                 contentScale = ContentScale.FillWidth
             )
         }
-        title?.let { Text(text = it, color = Color.White, fontSize = 14.sp, modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
-        release?.let { Text(text = it, color = Color.White, fontSize = 14.sp,  modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
-        rating?.let { Text(text = it, color = Color.White, fontSize = 14.sp,  modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
+        title?.let { Text(text = it, color = Color.White, fontSize = 14.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal, modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
+        release?.let { Text(text = it, color = Color.White, fontSize = 14.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal,  modifier = Modifier.padding(start = 2.dp, end = 2.dp)) }
+        rating?.let { Text(text = it, color = Color.White, fontSize = 14.sp, fontFamily = quicksand, fontWeight = FontWeight.Normal, modifier = Modifier.padding(start = 2.dp, end = 2.dp, bottom = 12.dp)) }
     }
 }
