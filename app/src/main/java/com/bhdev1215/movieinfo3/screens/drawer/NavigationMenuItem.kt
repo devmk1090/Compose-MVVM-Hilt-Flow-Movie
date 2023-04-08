@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.screens.components.drawer
+package com.bhdev1215.movieinfo3.screens.drawer
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -24,7 +24,7 @@ fun NavigationMenuItem(
     itemClick: () -> Unit
 ) {
     val texColor = if (item.isSelected) Color.Black else Color.White
-    val backgroundColor = if (item.isSelected) Color.Cyan else Color.Transparent
+    val backgroundColor = if (item.isSelected) Color.White else Color.Transparent
 
     Surface(
         modifier = Modifier

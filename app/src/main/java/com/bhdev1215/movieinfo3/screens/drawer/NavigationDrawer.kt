@@ -1,4 +1,4 @@
-package com.bhdev1215.movieinfo3.screens.components.drawer
+package com.bhdev1215.movieinfo3.screens.drawer
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues

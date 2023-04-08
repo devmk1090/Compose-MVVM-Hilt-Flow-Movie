@@ -20,7 +20,7 @@ import com.bhdev1215.movieinfo3.R
 import com.bhdev1215.movieinfo3.navigation.NavigationObject
 import com.bhdev1215.movieinfo3.screens.BannerAdView
 import com.bhdev1215.movieinfo3.screens.components.CommonAppBar
-import com.bhdev1215.movieinfo3.screens.components.drawer.NavigationDrawer
+import com.bhdev1215.movieinfo3.screens.drawer.NavigationDrawer
 import com.bhdev1215.movieinfo3.ui.theme.primaryGray
 import com.bhdev1215.movieinfo3.ui.theme.quicksand
 import kotlinx.coroutines.launch
