@@ -1,0 +1,194 @@
+package com.devkproject.movieinfo3.screens.components
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import coil.compose.rememberImagePainter
+import com.devkproject.movieinfo3.data.remote.response.TvDetailResponse
+import com.devkproject.movieinfo3.model.artist.Cast
+import com.devkproject.movieinfo3.model.artist.Crew
+import com.devkproject.movieinfo3.model.video.VideoItems
+import com.devkproject.movieinfo3.screens.people.CreditScreen
+import com.devkproject.movieinfo3.ui.theme.cornerRadius10
+import com.devkproject.movieinfo3.ui.theme.quicksand
+import com.devkproject.movieinfo3.util.Constants
+import com.devkproject.movieinfo3.util.Resource
+
+@Composable
+fun CommonTvDetail(
+    navController: NavController,
+    item: Resource<TvDetailResponse>,
+    videoList: ArrayList<VideoItems>? = null,
+    creditList: ArrayList<Cast>? = null,
+    crewList: ArrayList<Crew>? = null
+) {
+    val data = item.data
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(bottom = 50.dp)
+    ) {
+        Image(
+            painter = rememberImagePainter(
+                data = Constants.IMAGE_BASE_URL + data!!.posterPath,
+                builder = {
+                    crossfade(true)
+                }
+            ),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(585.dp)
+                .cornerRadius10(),
+            contentScale = ContentScale.FillWidth,
+            contentDescription = "Poster"
+        )
+        Column(Modifier.padding(start = 4.dp, end = 4.dp)) {
+            Spacer(modifier = Modifier.height(10.dp))
+
+            VideoScreen(videoList)
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth(0.75f),
+                    text = data.name,
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Bold
+                )
+                VoteAverageIndicator(
+                    modifier = Modifier
+                        .fillMaxWidth(0.25f)
+                        .padding(bottom = 12.dp),
+                    percentage = data.voteAverage.toFloat(),
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "방영정보",
+                    fontSize = 16.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(start = 8.dp),
+                    text = data.firstAirDate,
+                    fontSize = 14.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.White
+                )
+                LazyRow {
+                    items(data.networks.size) { it ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 4.dp),
+                            text = ", ${data.networks[it].name}",
+                            fontSize = 14.sp,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "시즌정보",
+                    fontSize = 16.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(start = 8.dp),
+                    text = "${data.numberOfSeasons}시즌",
+                    fontSize = 14.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.White
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(start = 4.dp),
+                    text = "${data.numberOfEpisodes}부작",
+                    fontSize = 14.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.Normal,
+                    color = Color.White
+                )
+            }
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "장르",
+                    fontSize = 16.sp,
+                    fontFamily = quicksand,
+                    fontWeight = FontWeight.SemiBold,
+                    color = Color.White
+                )
+                LazyRow {
+                    items(data.genres.size) { it ->
+                        Text(
+                            modifier = Modifier
+                                .padding(start = 8.dp),
+                            text = data.genres[it].name,
+                            fontSize = 14.sp,
+                            fontFamily = quicksand,
+                            fontWeight = FontWeight.Normal,
+                            color = Color.White
+                        )
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                text = data.overview,
+                fontSize = 14.sp,
+                fontFamily = quicksand,
+                fontWeight = FontWeight.Normal,
+                color = Color.White
+            )
+
+            Spacer(modifier = Modifier.height(10.dp))
+
+            CreditScreen(navController, creditList, crewList)
+        }
+    }
+}
