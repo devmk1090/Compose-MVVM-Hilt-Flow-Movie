@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bhdev1215.movieinfo3">
+    package="com.devkproject.movieinfo3">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".BaseApplication"
+        android:name="com.devkproject.movieinfo3.BaseApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_icon"
         android:label="@string/app_name"
@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MovieInfo3">
         <activity
-            android:name=".ui.MainActivity"
+            android:name="com.devkproject.movieinfo3.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.MovieInfo3">
             <intent-filter>
