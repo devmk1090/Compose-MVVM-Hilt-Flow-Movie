@@ -18,7 +18,7 @@ API_KEY="your-api-key"
 
 ### SDK Levels
 - Minimum SDK 23
-- Target SDK 32
+- Target SDK 33
 
 ### Screenshot
 
