@@ -6,10 +6,6 @@ plugins {
     id 'kotlin-parcelize'
 }
 
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-def admobKey = properties.getProperty('AD_KEY')
-
 android {
     compileSdk 34
 
@@ -23,7 +19,8 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_KEY", API_KEY)
-        manifestPlaceholders = [AD_KEY: admobKey]
+        def admobKey = project.findProperty('AD_KEY')
+        resValue "string", "ad_mob_value", admobKey
     }
 
     buildTypes {
