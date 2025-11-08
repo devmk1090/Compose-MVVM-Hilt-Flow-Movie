@@ -2,8 +2,8 @@ package com.devkproject.movieinfo3.screens.search
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -69,8 +69,12 @@ fun SearchScreen(
                 )
             },
             bottomBar = { BannerAdView() }
-        ) {
-            Column {
+        ) { innerPadding ->
+            Column (
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .padding(bottom = 50.dp)
+            ) {
                 SearchTextField(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -89,7 +93,7 @@ fun SearchScreen(
                 Box(Modifier.fillMaxSize()) {
                     LazyVerticalGrid(
                         modifier = Modifier.padding(bottom = 50.dp),
-                        cells = GridCells.Fixed(3),
+                        columns = GridCells.Fixed(3),
                         content = {
                             items(searchResult.itemCount) { search ->
                                 MovieItem(

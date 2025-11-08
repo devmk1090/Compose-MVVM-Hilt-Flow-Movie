@@ -2,8 +2,8 @@ package com.devkproject.movieinfo3.screens.people
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
@@ -112,7 +112,7 @@ fun CastDetailScreen(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                LazyVerticalGrid(cells = GridCells.Fixed(3), content = {
+                LazyVerticalGrid(columns = GridCells.Fixed(3), content = {
                     items(castFilmographyList!!.size) { it ->
                         MovieItem(
                             modifier = Modifier
