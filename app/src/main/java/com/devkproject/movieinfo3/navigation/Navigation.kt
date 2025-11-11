@@ -1,6 +1,10 @@
 package com.devkproject.movieinfo3.navigation
 
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -18,7 +22,11 @@ import com.devkproject.movieinfo3.screens.splash.SplashScreen
 fun Navigation(
     navController: NavHostController,
 ) {
-    NavHost(navController, startDestination = "splash") {
+    NavHost(
+        navController = navController,
+        startDestination = "splash",
+        modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars)
+    ) {
         composable(NavigationObject.SPLASH) {
             SplashScreen(navController = navController)
         }
