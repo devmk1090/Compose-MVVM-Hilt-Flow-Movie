@@ -27,7 +27,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="${AD_KEY}"/>
+            android:value="@string/ad_mob_value" />
     </application>
 
 </manifest>

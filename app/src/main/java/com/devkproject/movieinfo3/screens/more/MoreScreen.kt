@@ -3,8 +3,8 @@ package com.devkproject.movieinfo3.screens.more
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -101,12 +101,14 @@ fun MoreScreen(
             )
         },
         bottomBar = { BannerAdView() }
-    ) {
+    ) { innerPadding ->
         Column(
-            modifier = Modifier.padding(bottom = 50.dp)
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(bottom = 50.dp)
             ) {
             if (currentScreen == NavigationObject.HOME) {
-                LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
+                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                     items(movieTypeList!!.itemCount) { it ->
                         MovieItem(
                             modifier = Modifier
@@ -120,9 +122,9 @@ fun MoreScreen(
                             rating = movieTypeList[it]?.voteAverage.toString()
                         )
                     }
-                })
+                }
             } else {
-                LazyVerticalGrid(cells = GridCells.Fixed(2), content = {
+                LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                     items(tvTypeList!!.itemCount) { it ->
                         MovieItem(
                             modifier = Modifier
@@ -136,7 +138,7 @@ fun MoreScreen(
                             rating = tvTypeList[it]?.voteAverage.toString()
                         )
                     }
-                })
+                }
             }
         }
     }
